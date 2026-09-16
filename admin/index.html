@@ -1,0 +1,2110 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Admin | Esidai Savanna Creations</title>
+  <meta name="robots" content="noindex,nofollow">
+  <link rel="icon" type="image/png" href="/images/favicon.png" sizes="any">
+  <link rel="icon" type="image/x-icon" href="/images/favicon.ico">
+  <link rel="apple-touch-icon" sizes="180x180" href="/images/apple-touch-icon.png">
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Fraunces:opsz,wght@9..144,500;9..144,600;9..144,700&family=Work+Sans:wght@400;500;600;700&display=swap" rel="stylesheet">
+  <style>
+/* ===== Esidai Savanna Creations — Design System ===== */
+:root{
+  --brown:#2B1B13;
+  --cream:#F7F2E9;
+  --gold:#C99A43;
+  --gold-dark:#9A702B;
+  --green:#43543A;
+  --red:#8C2925;
+  --white:#FFFDF8;
+  --ink:#2B1B13;
+  --ink-soft:#5B4A3E;
+  --line:#E4D9C6;
+  --radius:2px;
+  --radius-lg:4px;
+  --shadow:0 10px 30px -18px rgba(43,27,19,.35);
+  --serif:'Fraunces', Georgia, 'Times New Roman', serif;
+  --sans:'Work Sans', -apple-system, BlinkMacSystemFont, 'Segoe UI', sans-serif;
+  --maxw:1220px;
+}
+*,*::before,*::after{box-sizing:border-box}
+html{scroll-behavior:smooth}
+body{
+  margin:0;
+  background:var(--cream);
+  color:var(--ink);
+  font-family:var(--sans);
+  font-size:16px;
+  line-height:1.55;
+  -webkit-font-smoothing:antialiased;
+}
+img{max-width:100%;display:block}
+a{color:inherit;text-decoration:none}
+button{font-family:inherit;cursor:pointer}
+input,select,textarea{font-family:inherit;font-size:1rem}
+h1,h2,h3,h4{font-family:var(--serif);color:var(--brown);margin:0 0 .5em;font-weight:600;line-height:1.15}
+h1{font-size:clamp(2.1rem,4.4vw,3.4rem);letter-spacing:-.01em}
+h2{font-size:clamp(1.5rem,2.6vw,2.1rem);letter-spacing:-.005em}
+h3{font-size:1.2rem}
+p{margin:0 0 1em;color:var(--ink-soft)}
+.container{max-width:var(--maxw);margin:0 auto;padding:0 24px}
+.visually-hidden{position:absolute;width:1px;height:1px;overflow:hidden;clip:rect(0 0 0 0);white-space:nowrap}
+:focus-visible{outline:2px solid var(--gold-dark);outline-offset:3px}
+
+/* Beadline divider — small recurring motif referencing beadwork, used sparingly */
+.beadline{display:flex;justify-content:center;gap:10px;margin:8px 0 0}
+.beadline span{width:6px;height:6px;border-radius:50%;background:var(--gold)}
+.beadline span:nth-child(3n){background:var(--red)}
+.beadline span:nth-child(5n){background:var(--green)}
+
+/* ===== Header ===== */
+.site-header{position:sticky;top:0;z-index:40;background:rgba(247,242,233,.94);border-bottom:1px solid var(--line)}
+.header-row{display:flex;align-items:center;justify-content:space-between;padding:16px 24px;gap:20px}
+.brand-mark{display:flex;flex-direction:column;line-height:1}
+.brand-mark .name{font-family:var(--serif);font-weight:600;font-size:1.3rem;color:var(--brown)}
+.brand-mark .tag{font-size:.68rem;color:var(--gold-dark);margin-top:3px}
+.main-nav{display:flex;align-items:center;gap:28px}
+.main-nav a{font-size:.94rem;color:var(--ink);position:relative;padding:4px 0}
+.main-nav a[aria-current="page"]{color:var(--gold-dark)}
+.main-nav a::after{content:"";position:absolute;left:0;right:0;bottom:-3px;height:2px;background:var(--gold);transform:scaleX(0);transition:transform .2s ease}
+.main-nav a:hover::after,.main-nav a[aria-current="page"]::after{transform:scaleX(1)}
+.header-actions{display:flex;align-items:center;gap:14px}
+.icon-btn{position:relative;background:none;border:none;color:var(--brown);padding:6px}
+.icon-btn svg{width:22px;height:22px}
+.cart-count{position:absolute;top:-2px;right:-2px;background:var(--red);color:var(--white);font-size:.62rem;min-width:16px;height:16px;border-radius:50%;display:flex;align-items:center;justify-content:center;padding:0 3px}
+.wa-pill{display:inline-flex;align-items:center;gap:8px;background:var(--green);color:var(--white);padding:9px 18px;border-radius:999px;font-size:.86rem;font-weight:600;white-space:nowrap}
+.wa-pill:hover{background:#374630}
+.nav-toggle{display:none;background:none;border:none;color:var(--brown)}
+.nav-toggle svg{width:26px;height:26px}
+@media (max-width:860px){
+  .main-nav{position:fixed;inset:64px 0 0 0;background:rgba(255,253,248,.9);backdrop-filter:blur(12px);-webkit-backdrop-filter:blur(12px);flex-direction:column;align-items:flex-start;padding:28px 24px;gap:22px;transform:translateX(100%);transition:transform .25s ease;overflow-y:auto}
+  .main-nav.open{transform:translateX(0)}
+  .main-nav a{font-size:1.1rem}
+  .nav-toggle{display:block}
+  .header-actions .wa-pill span.label{display:none}
+}
+
+/* ===== Buttons ===== */
+.btn{display:inline-flex;align-items:center;justify-content:center;gap:8px;padding:14px 26px;border-radius:2px;font-size:.92rem;font-weight:600;border:1px solid transparent;transition:transform .15s ease,background .15s ease;letter-spacing:.01em}
+.btn:active{transform:translateY(1px)}
+.btn-primary{background:var(--brown);color:var(--white)}
+.btn-primary:hover{background:#3c2819}
+.btn-gold{background:var(--gold);color:var(--brown)}
+.btn-gold:hover{background:var(--gold-dark);color:var(--white)}
+.btn-outline{background:transparent;color:var(--brown);border-color:var(--brown)}
+.btn-outline:hover{background:var(--brown);color:var(--white)}
+.btn-whatsapp{background:var(--green);color:var(--white)}
+.btn-whatsapp:hover{background:#374630}
+.btn-block{width:100%}
+.btn[disabled]{opacity:.5;cursor:not-allowed}
+.btn-sm{padding:8px 14px;font-size:.8rem}
+.btn-danger{background:var(--red);color:var(--white)}
+.btn-danger:hover{background:#701f1c}
+
+/* ===== Hero ===== */
+.hero{position:relative;padding:96px 0 84px;overflow:hidden;background:
+  radial-gradient(1100px 480px at 82% -10%, rgba(201,154,67,.16), transparent 60%),
+  var(--cream)}
+.hero-grid{display:grid;grid-template-columns:1.1fr .9fr;gap:56px;align-items:center}
+.hero-eyebrow{font-size:.8rem;color:var(--green);font-weight:600;margin-bottom:14px}
+.hero h1{margin-bottom:18px}
+.hero .lede{font-size:1.12rem;max-width:46ch}
+.hero-actions{display:flex;gap:14px;margin-top:30px;flex-wrap:wrap}
+.hero-art{position:relative;aspect-ratio:4/5;border-radius:4px;overflow:hidden;box-shadow:var(--shadow)}
+.hero-art img{width:100%;height:100%;object-fit:cover}
+.hero-art-caption{position:absolute;left:16px;bottom:16px;background:rgba(43,27,19,.82);color:var(--white);padding:10px 14px;font-size:.78rem;border-radius:2px}
+@media (max-width:900px){.hero-grid{grid-template-columns:1fr}.hero{padding:56px 0 48px}.hero-art{order:-1;aspect-ratio:16/10}}
+
+/* ===== Sections ===== */
+section{padding:72px 0}
+.section-head{max-width:640px;margin:0 0 36px}
+.section-head.center{margin:0 auto 44px;text-align:center}
+.eyebrow{font-size:.78rem;font-weight:600;color:var(--gold-dark);text-transform:none;letter-spacing:.02em;margin-bottom:10px;display:block}
+.band-brown{background:var(--brown);color:var(--cream)}
+.band-brown h2,.band-brown h3{color:var(--white)}
+.band-brown p{color:#D9C9B4}
+
+/* Value strip */
+.values{display:grid;grid-template-columns:repeat(4,1fr);gap:28px}
+.value-card{border-top:2px solid var(--gold);padding-top:16px}
+.value-card h3{font-size:1.02rem;margin-bottom:8px}
+.value-card p{font-size:.92rem;margin:0}
+@media (max-width:900px){.values{grid-template-columns:repeat(2,1fr)}}
+@media (max-width:520px){.values{grid-template-columns:1fr}}
+
+/* ===== Product grid & card ===== */
+.product-grid{display:grid;grid-template-columns:repeat(4,1fr);gap:26px}
+@media (max-width:1080px){.product-grid{grid-template-columns:repeat(3,1fr)}}
+@media (max-width:760px){.product-grid{grid-template-columns:repeat(2,1fr)}}
+@media (max-width:460px){.product-grid{grid-template-columns:1fr 1fr;gap:14px}}
+.product-card{display:flex;flex-direction:column;background:rgba(255,253,248,.9);backdrop-filter:blur(12px);-webkit-backdrop-filter:blur(12px);border:1px solid var(--line);border-radius:var(--radius-lg);overflow:hidden;transition:box-shadow .2s ease,transform .2s ease}
+.product-card:hover{box-shadow:var(--shadow);transform:translateY(-3px)}
+.product-media{position:relative;aspect-ratio:1/1;background:#EFE6D4;overflow:hidden}
+.product-media img{width:100%;height:100%;object-fit:cover}
+.product-badges{position:absolute;top:10px;left:10px;display:flex;flex-direction:column;gap:6px}
+.badge{font-size:.66rem;font-weight:700;padding:4px 8px;border-radius:999px;letter-spacing:.02em}
+.badge-new{background:var(--green);color:var(--white)}
+.badge-featured{background:var(--gold);color:var(--brown)}
+.badge-out{background:var(--red);color:var(--white)}
+.product-body{padding:16px 16px 18px;display:flex;flex-direction:column;gap:6px;flex:1}
+.product-cat{font-size:.72rem;color:var(--ink-soft)}
+.product-name{font-size:1rem;font-weight:600;color:var(--brown);margin:0}
+.product-name a{color:inherit}
+.product-price{font-family:var(--serif);color:var(--gold-dark);font-size:1.08rem;font-weight:600;margin-top:auto}
+.product-actions{display:flex;gap:8px;margin-top:10px}
+
+/* Skeletons */
+.skel{position:relative;overflow:hidden;background:#EFE6D4}
+.skel::after{content:"";position:absolute;inset:0;background:linear-gradient(90deg,transparent,rgba(255,255,255,.55),transparent);transform:translateX(-100%);animation:shimmer 1.4s infinite}
+@keyframes shimmer{to{transform:translateX(100%)}}
+.skel-line{height:12px;border-radius:2px;margin-top:8px}
+.skel-card{border:1px solid var(--line);border-radius:var(--radius-lg);overflow:hidden;background:rgba(255,253,248,.9);backdrop-filter:blur(12px);-webkit-backdrop-filter:blur(12px)}
+.skel-card .skel-media{aspect-ratio:1/1}
+.skel-card .skel-body{padding:16px}
+
+/* Empty / error states */
+.state-block{text-align:center;padding:64px 24px;border:1px dashed var(--line);border-radius:var(--radius-lg);background:rgba(255,253,248,.9);backdrop-filter:blur(12px);-webkit-backdrop-filter:blur(12px)}
+.state-block h3{margin-bottom:8px}
+.state-block p{max-width:40ch;margin:0 auto 20px}
+
+/* ===== Filters / Shop toolbar ===== */
+.shop-toolbar{display:flex;flex-wrap:wrap;gap:14px;align-items:center;justify-content:space-between;margin-bottom:30px;padding:18px;background:rgba(255,253,248,.9);backdrop-filter:blur(12px);-webkit-backdrop-filter:blur(12px);border:1px solid var(--line);border-radius:var(--radius-lg)}
+.search-field{position:relative;flex:1;min-width:220px}
+.search-field input{width:100%;padding:11px 14px 11px 38px;border:1px solid var(--line);border-radius:2px;background:var(--cream)}
+.search-field svg{position:absolute;left:12px;top:50%;transform:translateY(-50%);width:16px;height:16px;color:var(--ink-soft)}
+.filter-row{display:flex;gap:10px;flex-wrap:wrap;align-items:center}
+.select-field{padding:10px 12px;border:1px solid var(--line);border-radius:2px;background:var(--cream);color:var(--ink)}
+.chip-row{display:flex;gap:8px;flex-wrap:wrap;margin-bottom:26px}
+.chip{padding:7px 14px;border:1px solid var(--line);border-radius:999px;font-size:.82rem;background:rgba(255,253,248,.9);backdrop-filter:blur(12px);-webkit-backdrop-filter:blur(12px)}
+.chip[aria-pressed="true"]{background:var(--brown);color:var(--white);border-color:var(--brown)}
+
+/* ===== Breadcrumbs ===== */
+.breadcrumbs{font-size:.82rem;color:var(--ink-soft);margin-bottom:20px}
+.breadcrumbs a{color:var(--ink-soft)}
+.breadcrumbs a:hover{color:var(--gold-dark)}
+.breadcrumbs .sep{margin:0 6px;color:var(--line)}
+.breadcrumbs [aria-current]{color:var(--brown);font-weight:600}
+
+/* ===== Product detail ===== */
+.pd-grid{display:grid;grid-template-columns:.9fr 1fr;gap:52px}
+@media (max-width:880px){.pd-grid{grid-template-columns:1fr}}
+.pd-gallery-main{aspect-ratio:1/1;border-radius:var(--radius-lg);overflow:hidden;background:#EFE6D4;box-shadow:var(--shadow)}
+.pd-gallery-main img{width:100%;height:100%;object-fit:cover}
+.pd-thumbs{display:flex;gap:10px;margin-top:12px}
+.pd-thumbs button{width:64px;height:64px;border-radius:2px;overflow:hidden;border:2px solid transparent;padding:0;background:#EFE6D4}
+.pd-thumbs button[aria-current="true"]{border-color:var(--gold)}
+.pd-thumbs img{width:100%;height:100%;object-fit:cover}
+.pd-cat{color:var(--green);font-size:.82rem;font-weight:600}
+.pd-price{font-family:var(--serif);font-size:1.9rem;color:var(--gold-dark);margin:10px 0}
+.pd-stock{display:inline-flex;align-items:center;gap:6px;font-size:.84rem;font-weight:600;margin-bottom:18px}
+.pd-stock.in{color:var(--green)}
+.pd-stock.out{color:var(--red)}
+.pd-desc{border-top:1px solid var(--line);padding-top:18px;margin-top:6px}
+.qty-row{display:flex;align-items:center;gap:14px;margin:22px 0}
+.qty-stepper{display:flex;align-items:center;border:1px solid var(--line);border-radius:2px}
+.qty-stepper button{width:38px;height:42px;background:none;border:none;font-size:1.1rem;color:var(--brown)}
+.qty-stepper input{width:44px;text-align:center;border:none;background:none;font-size:1rem}
+.pd-actions{display:flex;gap:12px;flex-wrap:wrap}
+.pd-meta-list{margin-top:26px;font-size:.85rem;color:var(--ink-soft)}
+.pd-meta-list div{display:flex;justify-content:space-between;padding:8px 0;border-bottom:1px solid var(--line)}
+
+/* ===== Cart ===== */
+.cart-layout{display:grid;grid-template-columns:1.5fr 1fr;gap:40px;align-items:start}
+@media (max-width:860px){.cart-layout{grid-template-columns:1fr}}
+.cart-line{display:grid;grid-template-columns:76px 1fr auto;gap:16px;align-items:center;padding:16px 0;border-bottom:1px solid var(--line)}
+.cart-line img{width:76px;height:76px;object-fit:cover;border-radius:2px;background:#EFE6D4}
+.cart-line-name{font-weight:600;color:var(--brown)}
+.cart-line-cat{font-size:.78rem;color:var(--ink-soft)}
+.cart-line-remove{font-size:.78rem;color:var(--red);background:none;border:none;padding:0;margin-top:6px}
+.cart-line-right{text-align:right;display:flex;flex-direction:column;align-items:flex-end;gap:8px}
+.summary-card{background:rgba(255,253,248,.9);backdrop-filter:blur(12px);-webkit-backdrop-filter:blur(12px);border:1px solid var(--line);border-radius:var(--radius-lg);padding:24px}
+.summary-row{display:flex;justify-content:space-between;padding:8px 0;font-size:.94rem}
+.summary-row.total{border-top:1px solid var(--line);margin-top:8px;padding-top:14px;font-weight:700;font-size:1.1rem;color:var(--brown)}
+
+/* ===== Forms ===== */
+.field{margin-bottom:18px}
+.field label{display:block;font-size:.86rem;font-weight:600;color:var(--brown);margin-bottom:6px}
+.field input,.field select,.field textarea{width:100%;padding:12px 14px;border:1px solid var(--line);border-radius:2px;background:rgba(255,253,248,.9);backdrop-filter:blur(12px);-webkit-backdrop-filter:blur(12px)}
+.field textarea{resize:vertical;min-height:96px}
+.field .hint{font-size:.76rem;color:var(--ink-soft);margin-top:4px}
+.field .error{font-size:.78rem;color:var(--red);margin-top:4px;display:none}
+.field.invalid input,.field.invalid textarea{border-color:var(--red)}
+.field.invalid .error{display:block}
+fieldset{border:1px solid var(--line);border-radius:var(--radius-lg);padding:18px;margin:0 0 20px}
+legend{font-family:var(--serif);color:var(--brown);padding:0 8px;font-size:1.02rem}
+
+/* ===== Footer ===== */
+.site-footer{background:var(--brown);color:#D9C9B4;padding:64px 0 28px}
+.footer-grid{display:grid;grid-template-columns:1.4fr 1fr 1fr 1fr;gap:40px}
+@media (max-width:760px){.footer-grid{grid-template-columns:1fr 1fr}}
+@media (max-width:480px){.footer-grid{grid-template-columns:1fr}}
+.footer-grid h4{color:var(--white);font-family:var(--sans);font-size:.82rem;letter-spacing:.03em;margin-bottom:16px}
+.footer-grid ul{list-style:none;padding:0;margin:0;display:flex;flex-direction:column;gap:10px}
+.footer-grid a{font-size:.9rem;color:#D9C9B4}
+.footer-grid a:hover{color:var(--gold)}
+.footer-brand .name{font-family:var(--serif);font-size:1.3rem;color:var(--white)}
+.footer-brand p{color:#C6B49C;font-size:.9rem;max-width:36ch;margin-top:10px}
+.footer-bottom{border-top:1px solid rgba(255,255,255,.12);margin-top:48px;padding-top:22px;display:flex;justify-content:space-between;flex-wrap:wrap;gap:10px;font-size:.8rem;color:#B7A489}
+
+/* ===== Admin ===== */
+.admin-shell{display:grid;grid-template-columns:230px 1fr;min-height:100vh}
+@media (max-width:860px){.admin-shell{grid-template-columns:1fr}}
+.admin-side{background:var(--brown);color:var(--cream);padding:26px 18px;position:sticky;top:0;height:100vh}
+@media (max-width:860px){.admin-side{position:fixed;top:0;left:0;bottom:0;width:min(78vw,260px);z-index:200;display:flex;flex-direction:column;overflow-y:auto;padding:22px 16px;transform:translateX(-106%);transition:transform .28s ease;box-shadow:30px 0 60px -30px rgba(0,0,0,.5)}}
+.admin-side.open{transform:none}
+.admin-side .name{font-family:var(--serif);font-size:1.1rem;color:var(--white);margin-bottom:22px}
+@media (max-width:860px){.admin-side .name{display:flex;align-items:center;justify-content:space-between;gap:10px}}
+.admin-menu-btn{display:none;align-items:center;gap:9px;border:1px solid var(--line);background:rgba(255,253,248,.9);backdrop-filter:blur(12px);-webkit-backdrop-filter:blur(12px);border-radius:999px;padding:9px 14px;font-weight:600;font-size:.88rem;color:var(--brown)}
+.admin-menu-btn:active{transform:translateY(1px)}
+.admin-side .menu-close{display:none;background:rgba(255,255,255,.08);border:none;color:var(--white);width:32px;height:32px;border-radius:50%;font-size:1rem;line-height:1}
+@media (max-width:860px){
+  .admin-menu-btn{display:inline-flex}
+  .admin-side .menu-close{display:inline-flex}
+  body.admin-menu-open{overflow:hidden}
+}
+.admin-scrim{display:none}
+@media (max-width:860px){
+  .admin-scrim{display:block;position:fixed;inset:0;z-index:190;background:rgba(43,27,19,.5);opacity:0;pointer-events:none;transition:opacity .25s ease}
+  .admin-scrim.show{opacity:1;pointer-events:auto}
+}
+@media (min-width:861px){.admin-scrim{display:none !important}}
+.admin-nav-btn{display:flex;align-items:center;gap:10px;width:100%;padding:11px 12px;border:none;background:none;color:#D9C9B4;border-radius:2px;font-size:.9rem;text-align:left;white-space:nowrap}
+.admin-nav-btn[aria-current="true"]{background:rgba(255,255,255,.08);color:var(--white)}
+.admin-nav-btn:hover{background:rgba(255,255,255,.06)}
+.admin-main{padding:34px 30px;max-width:1180px}
+.admin-topbar{display:flex;justify-content:space-between;align-items:center;margin-bottom:26px;gap:16px;flex-wrap:wrap}
+.admin-cards{display:grid;grid-template-columns:repeat(4,1fr);gap:18px;margin-bottom:34px}
+@media (max-width:760px){.admin-cards{grid-template-columns:1fr 1fr}}
+/* Mobile: stack admin content, no horizontal page overflow */
+@media (max-width:760px){
+  .admin-shell{display:block;min-width:0}
+  .admin-main{padding:20px 14px 40px;min-width:0;overflow-x:hidden}
+  .admin-topbar{flex-direction:column;align-items:flex-start;gap:8px}
+  .admin-cards{gap:12px}
+  .stat-card{padding:14px}
+  .stat-card .num{font-size:1.6rem}
+  .admin-panel{padding:14px}
+  .tag-row{flex-wrap:wrap}
+  .form-grid{grid-template-columns:1fr}
+  .modal{padding:20px 16px}
+}
+/* Mobile: tables become stacked cards (no sideways scrolling) */
+@media (max-width:640px){
+  .table{display:block;overflow:visible;white-space:normal}
+  .table thead{display:none}
+  .table tbody{display:block}
+  .table tr{display:block;border:1px solid var(--line);border-radius:var(--radius-lg);padding:10px 12px;margin:0 0 12px;background:rgba(255,253,248,.9);backdrop-filter:blur(12px);-webkit-backdrop-filter:blur(12px)}
+  .table td{display:flex;align-items:center;justify-content:space-between;gap:12px;border-bottom:none;padding:5px 0;text-align:right}
+  .table td::before{content:attr(data-label);font-size:.68rem;text-transform:uppercase;letter-spacing:.05em;color:var(--ink-soft);font-weight:600;text-align:left;flex:0 0 auto}
+  .table td[data-label="Product"]{flex-direction:column;align-items:flex-start;text-align:left}
+  .table td[data-label="Product"]::before{margin-bottom:2px}
+  .table td[data-label="Description"]{white-space:normal}
+  /* Products: keep it tight — hide low-priority columns on phones */
+  /* Products cards on phones: only the name + View/Edit/Delete */
+  #products-table td[data-label="Image"],
+  #products-table td[data-label="Category"],
+  #products-table td[data-label="Price"],
+  #products-table td[data-label="Stock"],
+  #products-table td[data-label="Featured"],
+  #products-table td[data-label="Status"]{display:none}
+  #products-table td[data-label="Product"]{font-size:1rem;font-weight:600;font-family:var(--serif);color:var(--brown)}
+  .table td[data-label="Actions"]{justify-content:flex-start;flex-wrap:wrap;gap:8px;padding-top:8px;border-top:1px solid var(--line);margin-top:6px}
+  .table td[data-label="Actions"]::before{width:100%;flex:0 0 100%}
+  .table td .btn{min-width:0}
+}
+@media (max-width:480px){.admin-cards{grid-template-columns:1fr 1fr}}
+.stat-card{background:rgba(255,253,248,.9);backdrop-filter:blur(12px);-webkit-backdrop-filter:blur(12px);border:1px solid var(--line);border-radius:var(--radius-lg);padding:20px}
+.stat-card .num{font-family:var(--serif);font-size:2rem;color:var(--brown)}
+.stat-card .lbl{font-size:.82rem;color:var(--ink-soft)}
+.admin-panel{background:rgba(255,253,248,.9);backdrop-filter:blur(12px);-webkit-backdrop-filter:blur(12px);border:1px solid var(--line);border-radius:var(--radius-lg);padding:24px;margin-bottom:26px}
+.table{width:100%;border-collapse:collapse;font-size:.9rem}
+.table th{text-align:left;font-size:.74rem;text-transform:uppercase;letter-spacing:.03em;color:var(--ink-soft);border-bottom:1px solid var(--line);padding:10px 8px}
+.table td{padding:12px 8px;border-bottom:1px solid var(--line);vertical-align:middle}
+.table img{width:42px;height:42px;object-fit:cover;border-radius:2px}
+.status-dot{display:inline-flex;align-items:center;gap:6px;font-size:.8rem}
+.status-dot::before{content:"";width:8px;height:8px;border-radius:50%;background:var(--green)}
+.status-dot.off::before{background:var(--red)}
+  .table td .btn{min-width:0}
+  /* Orders: compact cards on phones — order ID + View button only */
+  #orders-table td[data-label="Customer"]{display:none}
+  #orders-table td[data-label="Order ID"]{font-family:var(--serif);font-weight:600;color:var(--brown);font-size:1rem}
+  #orders-table td[data-label="Actions"]{justify-content:flex-start;padding-top:8px;border-top:1px solid var(--line);margin-top:6px}
+  #orders-table td[data-label="Actions"]::before{display:none}
+.login-shell{min-height:100vh;display:flex;align-items:center;justify-content:center;background:var(--brown);padding:24px}
+@media (min-width:1400px){
+  .login-shell{align-items:flex-start;justify-content:center;padding-top:80px}
+}
+@media (max-width:600px){
+  .login-shell{align-items:center;justify-content:center;padding:20px 16px;min-height:100vh}
+  .login-card{padding:32px 24px;width:100%;max-width:380px}
+}
+.login-card{background:rgba(255,253,248,.9);backdrop-filter:blur(12px);-webkit-backdrop-filter:blur(12px);border-radius:var(--radius-lg);padding:40px 36px;width:100%;max-width:380px;margin:0 auto;box-shadow:var(--shadow)}
+.login-card h1{font-size:1.5rem;text-align:center}
+.modal-overlay{position:fixed;inset:0;background:rgba(43,27,19,.5);display:none;align-items:center;justify-content:center;padding:20px;z-index:80}
+.modal-overlay.open{display:flex}
+.modal{background:rgba(255,253,248,.9);backdrop-filter:blur(12px);-webkit-backdrop-filter:blur(12px);border-radius:var(--radius-lg);max-width:640px;width:100%;max-height:88vh;overflow-y:auto;padding:28px}
+.modal-head{display:flex;justify-content:space-between;align-items:center;margin-bottom:18px}
+.modal-close{background:none;border:none;font-size:1.4rem;color:var(--ink-soft);line-height:1}
+/* ===== Product quick-view modal ===== */
+.pv-body{display:grid;grid-template-columns:1fr 1fr;gap:22px}
+@media (max-width:640px){.pv-body{grid-template-columns:1fr}}
+.pv-main{width:100%;aspect-ratio:1/1;object-fit:cover;border-radius:var(--radius-lg);background:#EFE6D4}
+.pv-thumbs{display:flex;gap:8px;margin-top:10px;flex-wrap:wrap}
+.pv-thumbs img{width:54px;height:54px;object-fit:cover;border-radius:4px;border:2px solid transparent;cursor:pointer;background:#EFE6D4}
+.pv-thumbs img.active{border-color:var(--gold)}
+.pv-price{font-family:var(--serif);font-size:1.35rem;color:var(--gold-dark);margin:0 0 12px}
+.pv-facts{list-style:none;margin:0 0 14px;padding:0}
+.pv-facts li{display:flex;justify-content:space-between;align-items:center;gap:14px;padding:8px 0;border-bottom:1px solid var(--line);font-size:.9rem}
+.pv-facts li span:first-child{color:var(--ink-soft);font-size:.7rem;text-transform:uppercase;letter-spacing:.05em;font-weight:600}
+.pv-facts li b{font-weight:600;color:var(--brown);text-align:right;overflow-wrap:anywhere}
+.pv-desc{font-size:.92rem;color:var(--ink-soft);white-space:pre-line}
+.pv-actions{display:flex;gap:10px;flex-wrap:wrap;margin-top:16px}
+  .pv-actions .btn-outline{color:var(--brown);border-color:var(--brown)}
+  /* ===== Order detail overlay ===== */
+  .ov-body{padding:0}
+  .ov-top{display:flex;justify-content:space-between;align-items:center;gap:14px;flex-wrap:wrap;margin-bottom:18px;padding-bottom:14px;border-bottom:1px solid var(--line)}
+  .ov-ref{font-family:var(--serif);font-size:1.25rem;color:var(--brown);font-weight:600}
+  #ov-items .ov-item{display:flex;justify-content:space-between;gap:12px;padding:8px 0;border-bottom:1px solid var(--line);font-size:.88rem}
+  #ov-items .ov-item:last-child{border-bottom:none}
+  #ov-items .ov-item-name{color:var(--brown);font-weight:500}
+  #ov-items .ov-item-meta{color:var(--ink-soft);font-size:.78rem}
+  #ov-items .ov-item-total{font-weight:600;color:var(--brown);white-space:nowrap}
+  .ov-grand{display:flex;justify-content:space-between;margin-top:12px;padding-top:12px;border-top:2px solid var(--brown);font-weight:600;font-size:1rem}
+.pv-actions .btn{flex:0 0 auto}
+.pv-actions .btn-primary{background:var(--brown);color:var(--white)}
+.pv-actions .btn-outline{color:var(--brown);border-color:var(--brown)}
+.upload-box{border:2px dashed var(--line);border-radius:var(--radius-lg);padding:22px;text-align:center;font-size:.86rem;color:var(--ink-soft)}
+.upload-thumbs{display:flex;gap:10px;flex-wrap:wrap;margin-top:12px}
+.upload-thumbs .t{position:relative;width:70px;height:70px;border-radius:2px;overflow:hidden;background:#EFE6D4}
+.upload-thumbs .t img{width:100%;height:100%;object-fit:cover}
+.upload-thumbs .t button{position:absolute;top:2px;right:2px;background:rgba(43,27,19,.75);color:#fff;border:none;width:18px;height:18px;border-radius:50%;font-size:.7rem;line-height:1}
+.toast{position:fixed;bottom:24px;right:24px;background:var(--brown);color:var(--white);padding:14px 18px;border-radius:2px;font-size:.88rem;box-shadow:var(--shadow);z-index:100;display:none}
+.toast.show{display:block}
+.two-col{display:grid;grid-template-columns:1fr 1fr;gap:18px}
+@media (max-width:640px){.two-col{grid-template-columns:1fr}}
+.tag-row{display:flex;gap:8px;margin-bottom:16px;flex-wrap:wrap}
+.tag-row button{padding:6px 12px;font-size:.78rem;border-radius:999px;border:1px solid var(--line);background:var(--cream)}
+.tag-row button[aria-pressed="true"]{background:var(--brown);color:var(--white);border-color:var(--brown)}
+/* ===== Logo on login card (matches header lockup) ===== */
+.login-logo{display:flex;align-items:center;justify-content:center;gap:14px}
+.login-divider{display:flex;align-items:center;gap:10px;margin:14px 0;padding:0}
+.login-divider::before,.login-divider::after{content:"";flex:1;height:1px;background:var(--line)}
+.login-divider span{flex:0 0 auto;font-size:.78rem;color:var(--ink-soft);text-transform:uppercase;letter-spacing:.08em}
+.google-btn{border-color:var(--line);color:var(--brown)}
+.google-btn:hover{background:var(--brown);color:var(--white);border-color:var(--brown)}
+.login-logo .brand-emblem{width:42px;height:42px;color:var(--gold);flex:0 0 auto}
+.login-logo .brand-text{display:flex;flex-direction:column;align-items:center;line-height:1}
+.login-logo .brand-name{font-family:var(--serif);font-weight:700;font-size:1.45rem;letter-spacing:.3em;text-transform:uppercase;color:var(--brown);line-height:1}
+.login-logo .brand-tag{font-size:.66rem;letter-spacing:.22em;text-transform:uppercase;color:var(--gold-dark);margin-top:5px}
+
+/* ===== Spinners ===== */
+.spinner-ring{width:38px;height:38px;border:3px solid rgba(255,255,255,.25);border-top-color:var(--gold);border-radius:50%;animation:spin .7s linear infinite}
+.spinner-inline{display:inline-block;width:15px;height:15px;border:2px solid rgba(255,255,255,.45);border-top-color:var(--gold);border-radius:50%;animation:spin .7s linear infinite;vertical-align:-2px;margin-right:8px}
+@keyframes spin{to{transform:rotate(360deg)}}
+.global-spinner{position:fixed;inset:0;z-index:200;background:rgba(43,27,19,.6);display:flex;flex-direction:column;align-items:center;justify-content:center;gap:16px;color:var(--white)}
+.global-spinner p{margin:0;font-size:.9rem;letter-spacing:.05em}
+.global-spinner[hidden]{display:none}
+</style>
+</head>
+<body>
+
+  <div id="login-view" class="login-shell">
+    <div class="login-card">
+      <div class="login-logo">
+        <svg class="brand-emblem" viewBox="0 0 24 24" role="img" aria-label="Esidai emblem"><g fill="none" stroke="currentColor" stroke-width="1.6"><rect x="4" y="4" width="16" height="16" transform="rotate(45 12 12)"/><rect x="7.8" y="7.8" width="8.4" height="8.4" transform="rotate(45 12 12)"/></g><circle cx="12" cy="12" r="1.9" fill="currentColor"/></svg>
+        <div class="brand-text">
+          <span class="brand-name">Esidai</span>
+          <span class="brand-tag">Savanna Creations</span>
+        </div>
+      </div>
+      <h1 style="position:absolute;width:1px;height:1px;overflow:hidden;clip:rect(0 0 0 0);white-space:nowrap">Esidai Admin Login</h1>
+      <p style="text-align:center;color:var(--ink-soft);font-size:.88rem;margin-bottom:24px">Sign in to manage products, categories and orders.</p>
+      <form id="login-form" novalidate>
+        <div class="field" id="field-email">
+          <label for="login-email">Email</label>
+          <input type="email" id="login-email" required autocomplete="username">
+          <span class="error">Please enter a valid email.</span>
+        </div>
+        <div class="field" id="field-password">
+          <label for="login-password">Password</label>
+          <input type="password" id="login-password" required autocomplete="current-password">
+          <span class="error">Please enter your password.</span>
+        </div>
+        <p id="login-error" class="hint" style="color:var(--red);display:none;margin-bottom:12px"></p>
+        <button type="submit" class="btn btn-primary btn-block">Log In</button>
+        <button type="button" id="forgot-btn" class="btn btn-outline btn-block" style="margin-top:10px">Forgot Password?</button>
+        <div class="login-divider"><span>or</span></div>
+        <button type="button" id="google-login-btn" class="btn btn-outline btn-block google-btn">
+          <svg viewBox="0 0 24 24" width="18" height="18" aria-hidden="true"><path fill="#4285F4" d="M23.5 12.3c0-.9-.1-1.5-.3-2.2H12v4.1h6.6c-.1 1.1-.8 2.8-2.4 3.9l3.7 2.9c2.3-2.1 3.6-5.2 3.6-8.7z"/><path fill="#34A853" d="M12 24c3.2 0 6-1.1 7.9-2.9l-3.7-2.9c-1 .7-2.4 1.2-4.2 1.2-3.2 0-6-2.1-7-5.1l-3.9 3C3.1 21.3 7.2 24 12 24z"/><path fill="#FBBC05" d="M5 14.3c-.3-.7-.4-1.5-.4-2.3s.1-1.6.4-2.3l-4-3.1C.4 8.2 0 10 0 12s.4 3.8 1 5.4l4-3.1z"/><path fill="#EA4335" d="M12 4.8c2.3 0 3.8 1 4.7 1.8l3.2-3.1C17.9 1.6 15.2.5 12 .5 7.2.5 3.1 3.2 1 7l4 3.1c1-2.9 3.8-5.3 7-5.3z"/></svg>
+          Log in with Google
+        </button>
+      </form>
+    </div>
+  </div>
+
+  <div id="admin-view" class="admin-shell" style="display:none">
+    <aside class="admin-side" id="admin-side">
+      <div class="name" id="admin-user-name">Esidai Admin <button class="menu-close" id="admin-menu-close" aria-label="Close menu">✕</button></div>
+      <button class="admin-nav-btn" data-section="dashboard" aria-current="true">Dashboard</button>
+      <button class="admin-nav-btn" data-section="products">Products</button>
+      <button class="admin-nav-btn" data-section="categories">Categories</button>
+      <button class="admin-nav-btn" data-section="orders">Orders</button>
+      <button class="admin-nav-btn" data-section="settings">Settings</button>
+      <button class="admin-nav-btn" data-section="admin-users">Admin Users</button>
+      <button class="admin-nav-btn" id="logout-btn" style="margin-top:24px;border-top:1px solid rgba(255,255,255,.14);padding-top:16px">Log Out</button>
+    </aside>
+    <div class="admin-scrim" id="admin-scrim"></div>
+
+    <main class="admin-main">
+      <button class="admin-menu-btn" id="admin-menu-toggle" aria-controls="admin-side" aria-expanded="false">☰ Menu</button>
+      <!-- Dashboard -->
+      <section id="section-dashboard" class="admin-section">
+        <div class="admin-topbar">
+          <h1 style="font-size:1.6rem;margin:0">Dashboard</h1>
+          <span id="admin-user-email" class="hint"></span>
+        </div>
+        <div class="admin-cards">
+          <div class="stat-card"><div class="num" id="stat-total">0</div><div class="lbl">Total Products</div></div>
+          <div class="stat-card"><div class="num" id="stat-active">0</div><div class="lbl">Active Products</div></div>
+          <div class="stat-card"><div class="num" id="stat-oos">0</div><div class="lbl">Out of Stock</div></div>
+          <div class="stat-card"><div class="num" id="stat-featured">0</div><div class="lbl">Featured Products</div></div>
+        </div>
+        <div class="admin-panel">
+          <h2 style="font-size:1.1rem">Recent Orders</h2>
+          <table class="table" id="dashboard-orders-table">
+            <thead><tr><th>Reference</th><th>Customer</th><th>Total</th><th>Status</th></tr></thead>
+            <tbody></tbody>
+          </table>
+          <p class="hint" id="dashboard-orders-empty" style="display:none">No orders yet. Orders placed via WhatsApp checkout can be logged here once the Worker's /api/admin/orders endpoint is connected.</p>
+        </div>
+      </section>
+
+      <!-- Products -->
+      <section id="section-products" class="admin-section" style="display:none">
+        <div class="admin-topbar">
+          <h1 style="font-size:1.6rem;margin:0">Products</h1>
+          <button class="btn btn-primary btn-sm" id="new-product-btn">Add Product</button>
+        </div>
+        <div class="admin-panel">
+          <input type="search" id="product-search" placeholder="Search products by name…" aria-label="Search products" style="width:100%;padding:11px 14px;border:1px solid var(--line);border-radius:var(--radius-lg);margin-bottom:14px;font-size:.95rem">
+          <table class="table" id="products-table">
+            <thead><tr><th>Image</th><th>Name</th><th>Category</th><th>Price</th><th>Stock</th><th>Featured</th><th>Status</th><th>Actions</th></tr></thead>
+            <tbody id="products-tbody"></tbody>
+          </table>
+          <p class="hint" id="products-empty" style="display:none">No products have been added yet.</p>
+        </div>
+      </section>
+
+      <!-- Categories -->
+      <section id="section-categories" class="admin-section" style="display:none">
+        <div class="admin-topbar">
+          <h1 style="font-size:1.6rem;margin:0">Categories</h1>
+          <button class="btn btn-primary btn-sm" id="new-category-btn">Add Category</button>
+        </div>
+        <div class="admin-panel">
+          <table class="table">
+            <thead><tr><th>Name</th><th>Slug</th><th>Description</th><th>Status</th><th>Actions</th></tr></thead>
+            <tbody id="categories-tbody"></tbody>
+          </table>
+        </div>
+      </section>
+
+      <!-- Orders -->
+      <section id="section-orders" class="admin-section" style="display:none">
+        <div class="admin-topbar">
+          <h1 style="font-size:1.6rem;margin:0">Orders</h1>
+        </div>
+        <div class="admin-panel">
+          <table class="table" id="orders-table">
+            <thead><tr><th>Order ID</th><th>Action</th><th>Actions</th></tr></thead>
+            <tbody id="orders-tbody"></tbody>
+          </table>
+          <p class="hint" id="orders-empty">No orders have been recorded yet.</p>
+        </div>
+      </section>
+
+
+      <!-- Settings -->
+      <section id="section-settings" class="admin-section" style="display:none">
+        <div class="admin-topbar">
+          <h1 style="font-size:1.6rem;margin:0">Settings</h1>
+        </div>
+        <div class="admin-panel" style="max-width:560px">
+          <form id="settings-form">
+            <div class="field">
+              <label for="s-name">Business Name</label>
+              <input type="text" id="s-name" value="Esidai Savanna Creations">
+            </div>
+            <div class="field">
+              <label for="s-tagline">Tagline</label>
+              <input type="text" id="s-tagline" value="Authentic Maasai Beadwork &amp; Cultural Creations">
+            </div>
+            <div class="field">
+              <label for="s-whatsapp">WhatsApp Number</label>
+              <input type="text" id="s-whatsapp" value="254740184866">
+            </div>
+            <div class="field">
+              <label for="s-currency">Currency</label>
+              <input type="text" id="s-currency" value="KES">
+            </div>
+            <div class="field">
+              <label for="s-description">Business Description</label>
+              <textarea id="s-description">Esidai Savanna Creations is a Kenyan brand offering authentic Maasai beadwork, handmade jewellery and cultural creations.</textarea>
+            </div>
+            <button type="submit" class="btn btn-primary">Save Settings</button>
+          </form>
+        </div>
+      </section>
+
+      <!-- Admin Users -->
+      <section id="section-admin-users" class="admin-section" style="display:none">
+        <div class="admin-topbar">
+          <h1 style="font-size:1.6rem;margin:0">Admin Users</h1>
+        </div>
+        <div class="admin-panel" style="max-width:560px">
+          <h3 style="font-size:1.05rem;margin-bottom:14px">Add New Admin</h3>
+          <form id="admin-user-form">
+            <div class="field">
+              <label for="au-email">Email</label>
+              <input type="email" id="au-email" required autocomplete="off" placeholder="e.g. john@example.com">
+            </div>
+            <div class="field">
+              <label for="au-name">Full Name</label>
+              <input type="text" id="au-name" required autocomplete="off" placeholder="e.g. Alex Senerwa">
+            </div>
+            <div class="field">
+              <label for="au-password">Temporary Password</label>
+              <input type="text" id="au-password" required autocomplete="off" placeholder="min. 6 characters" minlength="6">
+              <span class="error">Password must be at least 6 characters.</span>
+            </div>
+            <p id="au-error" class="hint" style="color:var(--red);display:none;margin-bottom:12px"></p>
+            <p id="au-success" class="hint" style="color:var(--green);display:none;margin-bottom:12px"></p>
+            <button type="submit" class="btn btn-primary">Create Admin Account</button>
+          </form>
+          <p class="hint" style="margin-top:14px">Creates a Firebase account with the temporary password and adds the email to the D1 admin allow-list. The user should change their password after first sign-in.</p>
+        </div>
+        <div class="admin-panel">
+          <h3 style="font-size:1.05rem;margin-bottom:14px">Current Admins</h3>
+          <table class="table" id="admin-users-table">
+            <thead><tr><th>Name</th><th>Email</th><th>Role</th><th>Actions</th></tr></thead>
+            <tbody id="admin-users-tbody"></tbody>
+          </table>
+          <p class="hint" id="admin-users-empty">No admin users found.</p>
+        </div>
+      </section>
+    </main>
+  </div>
+
+  <!-- Product editor modal -->
+  <div class="modal-overlay" id="product-modal">
+    <div class="modal">
+      <div class="modal-head">
+        <h2 id="product-modal-title" style="font-size:1.2rem;margin:0">Add Product</h2>
+        <button class="modal-close" id="product-modal-close" aria-label="Close">&times;</button>
+      </div>
+      <form id="product-form">
+        <input type="hidden" id="p-id">
+        <div class="two-col">
+          <div class="field"><label for="p-name">Product Name</label><input type="text" id="p-name" required></div>
+          <div class="field"><label for="p-slug">Slug</label><input type="text" id="p-slug" placeholder="auto-generated"></div>
+        </div>
+        <div class="two-col">
+          <div class="field"><label for="p-category">Category</label><select id="p-category"></select></div>
+          <div class="field"><label for="p-price">Price (KES)</label><input type="number" id="p-price" min="0" required></div>
+        </div>
+        <div class="field"><label for="p-sale-price">Offer Price (KES, optional)</label><input type="number" id="p-sale-price" min="0" placeholder="Leave blank for no offer. Set a lower price here to run a discount."></div>
+        <div class="two-col">
+          <div class="field"><label for="p-sku">SKU</label><input type="text" id="p-sku" placeholder="auto-generated"><button type="button" id="p-sku-gen" class="btn btn-outline btn-sm" style="margin-top:6px">↻ Auto-generate</button></div>
+          <div class="field"><label for="p-stock">Stock Status</label>
+            <select id="p-stock"><option value="in_stock">In Stock</option><option value="out_of_stock">Out of Stock</option></select>
+          </div>
+        </div>
+        <div class="field"><label for="p-short">Short Description</label><input type="text" id="p-short"></div>
+        <div class="field"><label for="p-desc">Description</label><textarea id="p-desc"></textarea></div>
+
+        <div class="field">
+          <label>Product Images</label>
+          <div class="upload-box" id="upload-box">
+            <p style="margin:0 0 8px">Upload to Cloudflare Images (requires Worker + Images configured)</p>
+            <input type="file" id="image-input" accept="image/*" multiple>
+            <div class="upload-thumbs" id="upload-thumbs"></div>
+          </div>
+        </div>
+        <div class="tag-row">
+          <button type="button" id="p-featured-toggle" aria-pressed="false">Featured</button>
+          <button type="button" id="p-active-toggle" aria-pressed="true">Active</button>
+        </div>
+
+        <button type="submit" class="btn btn-primary btn-block">Save Product</button>
+      </form>
+    </div>
+  </div>
+
+  <!-- Product quick-view modal -->
+  <div class="modal-overlay" id="product-view-modal">
+    <div class="modal">
+      <div class="modal-head">
+        <h2 style="font-size:1.2rem;margin:0">Product Details</h2>
+        <button class="modal-close" id="product-view-close" aria-label="Close">&times;</button>
+      </div>
+      <div class="pv-body">
+        <div class="pv-gallery">
+          <img class="pv-main" id="pv-main" alt="">
+          <div class="pv-thumbs" id="pv-thumbs"></div>
+        </div>
+        <div>
+          <h3 id="pv-name" style="margin-top:0"></h3>
+          <div id="pv-price" class="pv-price"></div>
+          <ul class="pv-facts">
+            <li><span>Category</span><b id="pv-category"></b></li>
+            <li><span>SKU</span><b id="pv-sku"></b></li>
+            <li><span>Stock</span><b id="pv-stock"></b></li>
+            <li><span>Status</span><b id="pv-status"></b></li>
+            <li><span>Featured</span><b id="pv-featured"></b></li>
+            <li><span>Slug</span><b id="pv-slug"></b></li>
+          </ul>
+          <p class="pv-desc" id="pv-short"></p>
+          <p class="pv-desc" id="pv-desc"></p>
+          <div class="pv-actions">
+            <button type="button" class="btn btn-primary btn-sm" id="pv-edit-btn">Edit Product</button>
+            <a class="btn btn-outline btn-sm" id="pv-live-link" target="_blank" rel="noopener">Open Live Page</a>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <!-- Order detail overlay -->
+  <div class="modal-overlay" id="order-view-modal">
+    <div class="modal">
+      <div class="modal-head">
+        <h2 style="font-size:1.2rem;margin:0">Order Details</h2>
+        <button class="modal-close" id="order-view-close" aria-label="Close">&times;</button>
+      </div>
+      <div class="ov-body">
+        <div class="ov-top">
+          <div class="ov-ref" id="ov-ref"></div>
+          <select id="ov-status" class="order-status-select" aria-label="Update order status">
+            <option value="new">New</option>
+            <option value="confirmed">Confirmed</option>
+            <option value="fulfilled">Fulfilled</option>
+            <option value="cancelled">Cancelled</option>
+          </select>
+        </div>
+        <ul class="pv-facts">
+          <li><span>Customer</span><b id="ov-customer"></b></li>
+          <li><span>Phone</span><b id="ov-phone"></b></li>
+          <li><span>Location</span><b id="ov-location"></b></li>
+          <li><span>Total</span><b id="ov-total"></b></li>
+          <li><span>Items</span><b id="ov-item-count"></b></li>
+          <li><span>Notes</span><b id="ov-notes"></b></li>
+        </ul>
+        <h4 style="margin:18px 0 8px;font-size:.85rem;letter-spacing:.08em;text-transform:uppercase;color:var(--ink-soft)">Order Items</h4>
+        <div id="ov-items"></div>
+      </div>
+    </div>
+  </div>
+
+  <!-- Category editor modal -->
+  <div class="modal-overlay" id="category-modal">
+    <div class="modal">
+      <div class="modal-head">
+        <h2 id="category-modal-title" style="font-size:1.2rem;margin:0">Add Category</h2>
+        <button class="modal-close" id="category-modal-close" aria-label="Close">&times;</button>
+      </div>
+      <form id="category-form">
+        <input type="hidden" id="c-id">
+        <div class="field"><label for="c-name-f">Name</label><input type="text" id="c-name-f" required></div>
+        <div class="field"><label for="c-slug-f">Slug</label><input type="text" id="c-slug-f" placeholder="auto-generated"></div>
+        <div class="field"><label for="c-desc-f">Description</label><textarea id="c-desc-f"></textarea></div>
+        <div class="two-col">
+          <div class="field"><label for="c-seo-title-f">SEO Title (optional)</label><input type="text" id="c-seo-title-f"></div>
+          <div class="field"><label for="c-seo-desc-f">SEO Description (optional)</label><input type="text" id="c-seo-desc-f"></div>
+        </div>
+        <button type="submit" class="btn btn-primary btn-block">Save Category</button>
+      </form>
+    </div>
+  </div>
+
+  <div class="toast" id="toast"></div>
+  <div class="global-spinner" id="global-spinner" hidden>
+    <div class="spinner-ring" aria-hidden="true"></div>
+    <p id="global-spinner-label">Loading…</p>
+  </div>
+
+  <script>
+
+
+/* ===== Esidai Savanna Creations — Config & Data Layer =====
+   This layer is deliberately self-contained inside every page (no external
+   .js files, per project spec). It defines:
+     1. CONFIG — values the owner fills in once the Cloudflare Worker,
+        Cloudflare D1, Cloudflare Images and Firebase project exist.
+     2. A small SAMPLE catalogue used as a graceful fallback so the storefront
+        is fully browsable before the live API is connected.
+     3. apiFetch() — always tries the real Worker API first; only falls back
+        to sample data if the Worker is not yet configured/reachable, so the
+        moment CONFIG.API_BASE_URL is set, the site is running on real D1 data.
+     4. Cart, formatting, slug and WhatsApp-order helper functions shared by
+        every page.
+*/
+const CONFIG = {
+  SITE_URL: "https://esidaisavannacreations.shop",
+  API_BASE_URL: "https://esidai-api.princealexdigital.workers.dev",
+  FIREBASE_API_KEY: "AIzaSyBu9T5mluYSshz50NWR5uTQgtMXEpnFWpg",
+  WHATSAPP_NUMBER: "254740184866",
+  CURRENCY: "KES",
+  BRAND_NAME: "Esidai Savanna Creations",
+  TAGLINE: "Authentic Maasai Beadwork & Cultural Creations"
+};
+const WHATSAPP_NUMBER = CONFIG.WHATSAPP_NUMBER;
+
+/* ---- Suggested Cloudflare Worker endpoints this frontend expects ----
+   GET    /api/products              GET  /api/products/:id
+   GET    /api/products/slug/:slug   GET  /api/categories
+   GET    /api/categories/:slug      GET  /api/settings
+   POST   /api/admin/products        PUT  /api/admin/products/:id
+   DELETE /api/admin/products/:id    POST /api/admin/categories
+   PUT    /api/admin/categories/:id  DELETE /api/admin/categories/:id
+   GET    /api/admin/orders          PUT  /api/admin/orders/:id
+   PUT    /api/admin/settings
+   Admin routes require an Authorization: Bearer <Firebase ID token> header;
+   the Worker must verify the token and an admin allow-list before writing
+   to D1 — the frontend never talks to D1 or Cloudflare Images directly. */
+
+const SAMPLE_CATEGORIES = [
+  {id:1,name:"Necklaces",slug:"necklaces",description:"Hand-strung Maasai beaded necklaces, from everyday collars to statement pieces.",seo_title:"Maasai Beaded Necklaces Kenya | Esidai Savanna Creations",seo_description:"Shop handcrafted Maasai beaded necklaces from Kenya, made using traditional beading techniques."},
+  {id:2,name:"Bracelets",slug:"bracelets",description:"Stacked and single-strand beaded bracelets for everyday wear.",seo_title:"Maasai Beaded Bracelets Kenya | Esidai Savanna Creations",seo_description:"Browse handmade Maasai beaded bracelets, crafted in Kenya with colourful traditional beadwork."},
+  {id:3,name:"Earrings",slug:"earrings",description:"Lightweight beaded earrings inspired by Maasai patterns.",seo_title:"Maasai Beaded Earrings Kenya | Esidai Savanna Creations",seo_description:"Discover handmade Maasai beaded earrings from Esidai Savanna Creations, crafted in Kenya."},
+  {id:4,name:"Accessories",slug:"accessories",description:"Beaded belts, cuffs and wearable accessories.",seo_title:"Maasai Beaded Accessories Kenya | Esidai Savanna Creations",seo_description:"Explore handcrafted Maasai beaded accessories made in Kenya, from cuffs to beaded belts."},
+  {id:5,name:"Home & Décor",slug:"home-decor",description:"Beaded décor pieces that bring Maasai artistry into the home.",seo_title:"Maasai Beaded Home Décor Kenya | Esidai Savanna Creations",seo_description:"Shop Maasai-inspired beaded home décor, handcrafted in Kenya by Esidai Savanna Creations."},
+  {id:6,name:"Gifts",slug:"gifts",description:"Ready-to-gift beadwork pieces for meaningful occasions.",seo_title:"Kenyan Cultural Gifts | Esidai Savanna Creations",seo_description:"Find authentic Kenyan cultural gifts and handmade Maasai beadwork, perfect for meaningful giving."},
+  {id:7,name:"Cultural Creations",slug:"cultural-creations",description:"Signature pieces rooted in Maasai heritage and craftsmanship.",seo_title:"Maasai Cultural Creations Kenya | Esidai Savanna Creations",seo_description:"Discover signature Maasai cultural creations, handcrafted in Kenya with authentic beadwork."},
+  {id:8,name:"Caps & Headwear",slug:"caps",description:"Savannah-inspired caps, snapbacks and headwear.",seo_title:"Designed Caps & Headwear Kenya | Esidai Savanna Creations",seo_description:"Shop designer caps, snapbacks and cultural headwear from Kenya, crafted by Esidai Savanna Creations."},
+  {id:9,name:"T-Shirts & Tops",slug:"t-shirts",description:"Designed t-shirts and tops featuring savannah-inspired artwork.",seo_title:"Designed T-Shirts & Tops Kenya | Esidai Savanna Creations",seo_description:"Explore designed African t-shirts and casual tops, handmade in Kenya by Esidai Savanna Creations."},
+  {id:10,name:"Hoodies & Hoods",slug:"hoodies",description:"Comfortable hoodies and hoods finished with cultural detailing.",seo_title:"Cultural Hoodies & Hoods Kenya | Esidai Savanna Creations",seo_description:"Shop culturally designed hoodies and hoods from Esidai Savanna Creations in Kenya."}
+];
+
+const SAMPLE_PRODUCTS = [
+  {id:101,name:"Maasai Beaded Collar Necklace",slug:"maasai-beaded-collar-necklace",category:"Necklaces",category_slug:"necklaces",price:5000,sale_price:3999,sku:"ESC-NK-101",status:"active",featured:true,stock_status:"in_stock",short_description:"A bold hand-strung collar necklace in traditional Maasai colourways.",description:"This collar necklace is hand-strung bead by bead using traditional Maasai techniques passed down through generations. Its wide, layered rows sit beautifully at the collarbone and pair with both everyday and occasion wear. Each piece is made to order, so subtle variations in bead placement are part of its handmade character.",images:["https://images.unsplash.com/photo-1611591437281-460bfbe1220a?q=80&w=1200&auto=format&fit=crop","https://images.unsplash.com/photo-1611652022419-a9419f74343d?q=80&w=1200&auto=format&fit=crop"],alt:"Handcrafted Maasai beaded collar necklace by Esidai Savanna Creations"},
+  {id:102,name:"Traditional Beaded Bracelet Set",slug:"traditional-beaded-bracelet-set",category:"Bracelets",category_slug:"bracelets",price:1800,sku:"ESC-BR-102",status:"active",featured:true,stock_status:"in_stock",short_description:"A stackable set of three beaded bracelets in earthy, savannah tones.",description:"Three beaded bracelets designed to be worn stacked or individually. Each strand is finished with a secure traditional clasp and reflects the colour language of the East African savannah — ochre, olive and deep red beads set against warm brass accents.",images:["https://images.unsplash.com/photo-1611652022419-a9419f74343d?q=80&w=1200&auto=format&fit=crop","https://images.unsplash.com/photo-1611591437281-460bfbe1220a?q=80&w=1200&auto=format&fit=crop"],alt:"Stack of traditional Maasai beaded bracelets by Esidai Savanna Creations"},
+  {id:103,name:"Maasai Drop Beaded Earrings",slug:"maasai-drop-beaded-earrings",category:"Earrings",category_slug:"earrings",price:1200,sku:"ESC-ER-103",status:"active",featured:true,stock_status:"in_stock",short_description:"Lightweight drop earrings finished with hand-beaded fringe.",description:"These drop earrings are light enough for all-day wear yet make a striking statement. Fine beadwork fans out into a soft fringe, catching the light with every movement — a modern silhouette built on a traditional technique.",images:["https://images.unsplash.com/photo-1630019852942-f89202989a59?q=80&w=1200&auto=format&fit=crop"],alt:"Maasai beaded drop earrings handcrafted by Esidai Savanna Creations"},
+  {id:104,name:"Beaded Cuff Bracelet",slug:"beaded-cuff-bracelet",category:"Bracelets",category_slug:"bracelets",price:2200,sku:"ESC-BR-104",status:"active",featured:false,stock_status:"in_stock",short_description:"A wide statement cuff with a geometric Maasai beading pattern.",description:"A structured cuff bracelet built on a flexible band and finished with a dense geometric beading pattern. Designed as a standalone statement piece for both casual and formal occasions.",images:["https://images.unsplash.com/photo-1611591437281-460bfbe1220a?q=80&w=1200&auto=format&fit=crop"],alt:"Wide Maasai beaded cuff bracelet by Esidai Savanna Creations"},
+  {id:105,name:"Beaded Wall Décor Panel",slug:"beaded-wall-decor-panel",category:"Home & Décor",category_slug:"home-decor",price:4200,sku:"ESC-HD-105",status:"active",featured:false,stock_status:"in_stock",short_description:"A hand-beaded décor panel bringing Maasai pattern work into the home.",description:"This décor panel translates traditional Maasai beading patterns onto a wall-ready piece, handcrafted on a woven backing. It brings colour and cultural artistry into living spaces, entryways or gallery walls.",images:["https://images.unsplash.com/photo-1615486511262-f8d7f6c1ff92?q=80&w=1200&auto=format&fit=crop"],alt:"Hand-beaded Maasai wall décor panel by Esidai Savanna Creations"},
+  {id:106,name:"Beaded Gift Set — Necklace & Earrings",slug:"beaded-gift-set-necklace-earrings",category:"Gifts",category_slug:"gifts",price:6500,sku:"ESC-GF-106",status:"active",featured:true,stock_status:"in_stock",short_description:"A matching necklace and earring set, presented ready to gift.",description:"A coordinated necklace and earring set finished in matching beadwork and presented in gift-ready packaging. A thoughtful way to share authentic Maasai craftsmanship with someone special.",images:["https://images.unsplash.com/photo-1630019852942-f89202989a59?q=80&w=1200&auto=format&fit=crop","https://images.unsplash.com/photo-1611652022419-a9419f74343d?q=80&w=1200&auto=format&fit=crop"],alt:"Maasai beaded necklace and earring gift set by Esidai Savanna Creations"},
+  {id:107,name:"Beaded Leather Belt",slug:"beaded-leather-belt",category:"Accessories",category_slug:"accessories",price:3400,sku:"ESC-AC-107",status:"active",featured:false,stock_status:"out_of_stock",short_description:"A leather belt finished with a hand-beaded traditional pattern.",description:"Genuine leather belt finished with a densely beaded front panel in a traditional Maasai pattern. Adjustable sizing and a sturdy metal buckle make it as functional as it is decorative.",images:["https://images.unsplash.com/photo-1611591437281-460bfbe1220a?q=80&w=1200&auto=format&fit=crop"],alt:"Hand-beaded leather belt by Esidai Savanna Creations"},
+  {id:108,name:"Ceremonial Beaded Collar",slug:"ceremonial-beaded-collar",category:"Cultural Creations",category_slug:"cultural-creations",price:8500,sku:"ESC-CC-108",status:"active",featured:false,stock_status:"in_stock",short_description:"A large ceremonial-style collar rooted in Maasai heritage.",description:"Inspired by ceremonial Maasai beadwork, this large collar piece is built up in concentric rows of colour. It is a signature cultural creation for those who want a striking, heritage-rooted centrepiece.",images:["https://images.unsplash.com/photo-1611652022419-a9419f74343d?q=80&w=1200&auto=format&fit=crop"],alt:"Ceremonial Maasai beaded collar by Esidai Savanna Creations"},
+  {id:201,name:"Esidai Embroidered Cap",slug:"esidai-embroidered-cap",category:"Caps & Headwear",category_slug:"caps",price:1500,sku:"ESC-CAP-201",status:"active",featured:true,stock_status:"in_stock",short_description:"A structured cap featuring hand-embroidered Esidai detailing.",description:"A classic structured cap finished with embroidered Esidai branding and a subtle savannah-inspired stitch. Adjustable fit and premium cotton twill built to be worn every day.",images:["https://images.unsplash.com/photo-1521369909029-2afed882baee?q=80&w=1200&auto=format&fit=crop"],alt:"Esidai embroidered cap handcrafted in Kenya"},
+  {id:202,name:"Savanna Designer T-Shirt",slug:"savanna-designer-t-shirt",category:"T-Shirts & Tops",category_slug:"t-shirts",price:2200,sku:"ESC-TS-202",status:"active",featured:true,stock_status:"in_stock",short_description:"A soft cotton tee with a hand-printed savanna design.",description:"This designer t-shirt is cut from soft, breathable cotton and features a hand-printed design drawing on East African colour and pattern. Pre-shrunk and machine washable for easy everyday wear.",images:["https://images.unsplash.com/photo-1521572163474-6864f9cf17ab?q=80&w=1200&auto=format&fit=crop","https://images.unsplash.com/photo-1503341504253-dff4815485f1?q=80&w=1200&auto=format&fit=crop"],alt:"Savanna designer t-shirt by Esidai Savanna Creations"},
+  {id:203,name:"Cultural Print Tee",slug:"cultural-print-tee",category:"T-Shirts & Tops",category_slug:"t-shirts",price:2000,sku:"ESC-TS-203",status:"active",featured:false,stock_status:"in_stock",short_description:"An everyday tee with a bold cultural print.",description:"A relaxed-fit cotton tee featuring a bold cultural print inspired by Maasai artistry. A versatile staple that pairs with everything from jeans to shorts.",images:["https://images.unsplash.com/photo-1503341504253-dff4815485f1?q=80&w=1200&auto=format&fit=crop"],alt:"Cultural print t-shirt by Esidai Savanna Creations"},
+  {id:204,name:"Signature Beaded Hoodie",slug:"signature-beaded-hoodie",category:"Hoodies & Hoods",category_slug:"hoodies",price:3200,sku:"ESC-HD-204",status:"active",featured:true,stock_status:"in_stock",short_description:"A cosy fleece hoodie with beaded detailing at the hood.",description:"A heavy-weight fleece hoodie built for warmth, finished with hand-beaded detailing along the hood opening — a quiet nod to the brand's beading heritage. Kangaroo pocket and adjustable drawstring.",images:["https://images.unsplash.com/photo-1556821840-3a63f95609a7?q=80&w=1200&auto=format&fit=crop"],alt:"Signature beaded hoodie by Esidai Savanna Creations"},
+  {id:205,name:"Cozy Everyday Hood",slug:"cozy-everyday-hood",category:"Hoodies & Hoods",category_slug:"hoodies",price:3000,sku:"ESC-HD-205",status:"active",featured:false,stock_status:"in_stock",short_description:"A soft everyday hood in savannah tones.",description:"A relaxed-fit hood in warm savannah tones with a soft brushed interior. Light enough for layering, warm enough for cool evenings.",images:["https://images.unsplash.com/photo-1556821840-3a63f95609a7?q=80&w=1200&auto=format&fit=crop"],alt:"Cozy everyday hood by Esidai Savanna Creations"},
+  {id:206,name:"Kanairo Snapback Cap",slug:"kanairo-snapback-cap",category:"Caps & Headwear",category_slug:"caps",price:1800,sku:"ESC-CAP-206",status:"active",featured:false,stock_status:"in_stock",short_description:"A modern snapback with urban-meets-cultural styling.",description:"A contemporary snapback cap that blends everyday street styling with cultural detailing. Snap closure for a one-size adjustable fit.",images:["https://images.unsplash.com/photo-1521369909029-2afed882baee?q=80&w=1200&auto=format&fit=crop"],alt:"Kanairo snapback cap by Esidai Savanna Creations"}
+];
+
+/* ---- Formatting helpers ---- */
+function formatPrice(amount){
+  const n = Number(amount)||0;
+  return "KSh " + n.toLocaleString("en-KE");
+}
+function slugify(str){
+  return String(str).toLowerCase().trim().replace(/[^a-z0-9]+/g,"-").replace(/(^-|-$)/g,"");
+}
+function escapeHtml(str){
+  return String(str==null?"":str).replace(/[&<>"']/g,c=>({"&":"&amp;","<":"&lt;",">":"&gt;",'"':"&quot;","'":"&#39;"}[c]));
+}
+function qs(sel,root){return (root||document).querySelector(sel)}
+function qsa(sel,root){return Array.from((root||document).querySelectorAll(sel))}
+
+/* ---- API layer: real Worker first, sample data fallback ---- */
+async function apiFetch(path, fallback){
+  const configured = CONFIG.API_BASE_URL && !/YOUR-CLOUDFLARE-WORKER-URL/.test(CONFIG.API_BASE_URL);
+  if(configured){
+    try{
+      const res = await fetch(CONFIG.API_BASE_URL.replace(/\/$/,"") + path);
+      if(res.ok) return await res.json();
+    }catch(e){ /* fall through to sample data */ }
+  }
+  return fallback;
+}
+async function fetchProducts(){ return apiFetch("/api/products", SAMPLE_PRODUCTS); }
+async function fetchCategories(){ return apiFetch("/api/categories", SAMPLE_CATEGORIES); }
+async function fetchProductBySlug(slug){
+  const configured = CONFIG.API_BASE_URL && !/YOUR-CLOUDFLARE-WORKER-URL/.test(CONFIG.API_BASE_URL);
+  if(configured){
+    try{
+      const res = await fetch(CONFIG.API_BASE_URL.replace(/\/$/,"") + "/api/products/slug/" + encodeURIComponent(slug));
+      if(res.ok) return await res.json();
+    }catch(e){}
+  }
+  return SAMPLE_PRODUCTS.find(p=>p.slug===slug) || null;
+}
+
+/* ---- Cart (localStorage) ----
+   NOTE: cart prices are for display/WhatsApp-message convenience only.
+   The order is confirmed manually by Esidai over WhatsApp, so localStorage
+   is safe here — it never authorises a payment. */
+const CART_KEY = "esidai_cart_v1";
+function getCart(){
+  try{ return JSON.parse(localStorage.getItem(CART_KEY)) || []; }catch(e){ return []; }
+}
+function saveCart(cart){
+  localStorage.setItem(CART_KEY, JSON.stringify(cart));
+  updateCartBadge();
+}
+function addToCart(product, qty){
+  qty = Math.max(1, parseInt(qty||1,10));
+  const cart = getCart();
+  const existing = cart.find(i=>i.id===product.id);
+  if(existing){ existing.qty += qty; }
+  else {
+    cart.push({
+      id: product.id, name: product.name, price: product.price,
+      image: (product.images&&product.images[0])||"", slug: product.slug, qty: qty
+    });
+  }
+  saveCart(cart);
+}
+function removeFromCart(id){
+  saveCart(getCart().filter(i=>i.id!==id));
+}
+function setQty(id, qty){
+  qty = Math.max(1, parseInt(qty||1,10));
+  const cart = getCart();
+  const item = cart.find(i=>i.id===id);
+  if(item){ item.qty = qty; saveCart(cart); }
+}
+function cartCount(){ return getCart().reduce((s,i)=>s+i.qty,0); }
+function cartTotal(){ return getCart().reduce((s,i)=>s+i.qty*i.price,0); }
+function updateCartBadge(){
+  qsa(".cart-count").forEach(el=>{
+    const n = cartCount();
+    el.textContent = n;
+    el.style.display = n>0 ? "flex" : "none";
+  });
+}
+
+/* ---- Order number + WhatsApp message ---- */
+function generateOrderNumber(){
+  const d = new Date();
+  const ymd = d.getFullYear().toString() + String(d.getMonth()+1).padStart(2,"0") + String(d.getDate()).padStart(2,"0");
+  const rand = Math.floor(1000 + Math.random()*9000);
+  return "ESC-" + ymd + "-" + rand;
+}
+function buildWhatsAppMessage(orderRef, cart, customer){
+  const lines = [];
+  lines.push("Hello " + CONFIG.BRAND_NAME + ",");
+  lines.push("");
+  lines.push("I would like to place an order.");
+  lines.push("");
+  lines.push("Order Reference: " + orderRef);
+  lines.push("");
+  lines.push("Items:");
+  cart.forEach(i=>{
+    lines.push(i.name + " x " + i.qty);
+    lines.push(formatPrice(i.price*i.qty));
+    lines.push("");
+  });
+  lines.push("Total: " + formatPrice(cart.reduce((s,i)=>s+i.qty*i.price,0)));
+  lines.push("");
+  lines.push("Customer Details:");
+  lines.push("Name: " + (customer.name||""));
+  lines.push("Phone: " + (customer.phone||""));
+  lines.push("Location: " + (customer.location||""));
+  if(customer.notes){
+    lines.push("");
+    lines.push("Additional Notes:");
+    lines.push(customer.notes);
+  }
+  return lines.join("\n");
+}
+function whatsappLink(message){
+  return "https://wa.me/" + WHATSAPP_NUMBER + "?text=" + encodeURIComponent(message);
+}
+function openGeneralWhatsApp(message){
+  window.open(whatsappLink(message), "_blank", "noopener");
+}
+
+/* ---- Mobile nav toggle (shared header behaviour) ---- */
+function initHeader(){
+  const toggle = qs(".nav-toggle");
+  const nav = qs(".main-nav");
+  if(toggle && nav){
+    toggle.addEventListener("click", ()=>{
+      const open = nav.classList.toggle("open");
+      toggle.setAttribute("aria-expanded", open ? "true":"false");
+    });
+    qsa(".main-nav a").forEach(a=>a.addEventListener("click", ()=>nav.classList.remove("open")));
+  }
+  updateCartBadge();
+}
+document.addEventListener("DOMContentLoaded", initHeader);
+
+
+  /* ===== Firebase Authentication & Admin Authorization =====
+     Only the public web client config belongs in the frontend — never put
+     Firebase Admin/service-account credentials here. Sign-in is gated:
+     after Firebase Auth verifies the password, this file checks the
+     Firestore `users` collection for a document matching the signed-in
+     email whose `role` is "admin". Only those users may view the admin
+     panel, and the admin's `name` from that document is used for the
+     greeting. Authorization for writes is also enforced by the Cloudflare
+     Worker (see below). */
+  const FIREBASE_CONFIG = {
+    apiKey: "AIzaSyBu9T5mluYSshz50NWR5uTQgtMXEpnFWpg",
+    authDomain: "esidai-savanna-creations.firebaseapp.com",
+    projectId: "esidai-savanna-creations",
+    storageBucket: "esidai-savanna-creations.firebasestorage.app",
+    messagingSenderId: "770317517801",
+    appId: "1:770317517801:web:b039b377ab1ff9537a4178"
+  };
+
+  let firebaseReady = false;
+  let currentUser = null;
+
+  function loadFirebase(){
+    return new Promise((resolve)=>{
+      const appScript = document.createElement("script");
+      appScript.src = "https://www.gstatic.com/firebasejs/10.12.2/firebase-app-compat.js";
+      appScript.onload = ()=>{
+        const authScript = document.createElement("script");
+        authScript.src = "https://www.gstatic.com/firebasejs/10.12.2/firebase-auth-compat.js";
+        authScript.onload = ()=>{
+          const fsScript = document.createElement("script");
+          fsScript.src = "https://www.gstatic.com/firebasejs/10.12.2/firebase-firestore-compat.js";
+          fsScript.onload = ()=>{
+            try{
+              firebase.initializeApp(FIREBASE_CONFIG);
+              firebaseReady = true;
+            }catch(e){ firebaseReady = false; }
+            resolve();
+          };
+          fsScript.onerror = ()=>resolve();
+          document.head.appendChild(fsScript);
+        };
+        authScript.onerror = ()=>resolve();
+        document.head.appendChild(authScript);
+      };
+      appScript.onerror = ()=>resolve();
+      document.head.appendChild(appScript);
+    });
+  }
+
+  async function getIdToken(){
+    if(!firebaseReady || !firebase.auth().currentUser) return null;
+    return await firebase.auth().currentUser.getIdToken();
+  }
+
+  /* ===== Local admin data store =====
+     Mirrors the D1 schema described in the project spec. Until the
+     Cloudflare Worker + D1 are connected (CONFIG.API_BASE_URL configured),
+     admin changes are kept in localStorage so the interface is fully
+     testable end-to-end; every write below is written to call the real
+     Worker endpoint first, falling back to local storage only when the
+     Worker is unreachable, mirroring apiFetch()'s behaviour on the
+     storefront. */
+  const ADMIN_DB_KEY = "esidai_admin_db_v1";
+  function loadAdminDB(){
+    try{
+      const raw = localStorage.getItem(ADMIN_DB_KEY);
+      if(raw) return JSON.parse(raw);
+    }catch(e){}
+    const db = { products: JSON.parse(JSON.stringify(SAMPLE_PRODUCTS)), categories: JSON.parse(JSON.stringify(SAMPLE_CATEGORIES)), orders: [], adminUsers: [] };
+    localStorage.setItem(ADMIN_DB_KEY, JSON.stringify(db));
+    return db;
+  }
+  function saveAdminDB(db){ localStorage.setItem(ADMIN_DB_KEY, JSON.stringify(db)); }
+  let DB = loadAdminDB();
+
+  /* ===== Refresh from the Cloudflare Worker (single source of truth) =====
+     On sign-in we reload products/categories/orders FROM the Worker API so the
+     admin panel always reflects live D1 data (not just localStorage). Falls
+     back silently to the cached local DB when the Worker is unreachable. */
+  async function refreshFromRemote(){
+    const configured = CONFIG.API_BASE_URL && !/YOUR-CLOUDFLARE-WORKER-URL/.test(CONFIG.API_BASE_URL);
+    if(!configured) return false;
+    let ok = false;
+    try{
+      const base = CONFIG.API_BASE_URL.replace(/\/$/,"");
+      const pres = await fetch(base + "/api/products");
+      if(pres.ok){
+        const p = await pres.json();
+        if(Array.isArray(p)){ DB.products = p; ok = true; }
+        else if(p.error) console.error("[Esidai admin] products endpoint error:", p.error);
+      }
+    }catch(err){ console.error("[Esidai admin] products refresh failed:", err); }
+    try{
+      const base = CONFIG.API_BASE_URL.replace(/\/$/,"");
+      const cres = await fetch(base + "/api/categories");
+      if(cres.ok){
+        const c = await cres.json();
+        if(Array.isArray(c)){ DB.categories = c; }
+      }
+    }catch(err){ console.error("[Esidai admin] categories refresh failed:", err); }
+    try{
+      const orders = await adminApi("GET", "/api/admin/orders");
+      if(Array.isArray(orders)){ DB.orders = orders; }
+         }catch(err){ console.error("[Esidai admin] orders refresh failed:", err); }
+    try{
+      const users = await adminApi("GET", "/api/admin/users");
+      if(Array.isArray(users)){ DB.adminUsers = users; }
+    }catch(err){ console.error("[Esidai admin] admin users refresh failed:", err); }
+    try{
+      const base = CONFIG.API_BASE_URL.replace(/\/$/,"");
+      const sres = await fetch(base + "/api/settings");
+      if(sres.ok){
+        const s = await sres.json();
+        if(s && typeof s === "object"){
+          DB.settings = s;
+          if(s.name) qs("#s-name").value = s.name;
+          if(s.tagline) qs("#s-tagline").value = s.tagline;
+          if(s.whatsapp) qs("#s-whatsapp").value = s.whatsapp;
+          if(s.currency) qs("#s-currency").value = s.currency;
+          if(s.description) qs("#s-description").value = s.description;
+        }
+      }
+    }catch(err){ console.error("[Esidai admin] settings refresh failed:", err); }
+        if(ok){ saveAdminDB(DB); }
+    renderAdminUsersTable();
+    return ok;
+  }
+
+  let lastApiError = "";
+  /* Parsed from the Worker's error body so callers can react to the failure
+     kind (code "DUPLICATE" on field "products.sku") rather than string-matching
+     lastApiError. */
+  let lastApiErrorCode = "";
+  let lastApiErrorField = "";
+  /* Fallback for a Worker that replied with a raw D1 message and no structured
+     {code, field} envelope — e.g. the previously deployed Worker, or any error
+     path that bypasses jsonError(). Without this the duplicate recovery below
+     could never trigger until the updated Worker is live. */
+  function parseApiError(msg){
+    const s = String(msg == null ? "" : msg);
+    if(!/UNIQUE constraint failed/i.test(s)) return null;
+    const m = s.match(/UNIQUE constraint failed:\s*([A-Za-z0-9_.]+)/i);
+    return { code: "DUPLICATE", field: m ? m[1].toLowerCase() : "" };
+  }
+  async function adminApi(method, path, body){
+    lastApiError = "";
+    lastApiErrorCode = "";
+    lastApiErrorField = "";
+    const configured = CONFIG.API_BASE_URL && !/YOUR-CLOUDFLARE-WORKER-URL/.test(CONFIG.API_BASE_URL);
+    if(!configured){
+      lastApiError = "API_BASE_URL is not configured in CONFIG.";
+      return null;
+    }
+    const token = await getIdToken();
+    if(!token){
+      lastApiError = "No Firebase sign-in token available — please sign out and back in.";
+      console.error("[Esidai admin] No auth token for", method, path);
+    }
+    try{
+      const res = await fetch(CONFIG.API_BASE_URL.replace(/\/$/,"") + path, {
+        method,
+        headers: Object.assign({"Content-Type":"application/json"}, token ? {"Authorization":"Bearer "+token} : {}),
+        body: body ? JSON.stringify(body) : undefined
+      });
+      if(res.ok) return await res.json();
+      let detail = "";
+      try{ detail = await res.text(); }catch(_e){}
+      let parsed = null;
+      try{ parsed = JSON.parse(detail); }catch(_e){}
+      /* Prefer the Worker's human-readable message (it explains duplicates and
+         other constraint failures) and keep the raw payload in the console. */
+      lastApiErrorCode = (parsed && parsed.code) || "";
+      lastApiErrorField = (parsed && parsed.field) || "";
+      lastApiError = (parsed && parsed.error)
+        ? String(parsed.error)
+        : ("Worker rejected " + method + " " + path + " → HTTP " + res.status + (detail ? " · " + detail : ""));
+      if(!lastApiErrorCode){
+        const fb = parseApiError(lastApiError);
+        if(fb){ lastApiErrorCode = fb.code; lastApiErrorField = fb.field; }
+      }
+      console.error("[Esidai admin]", method, "→ HTTP", res.status, detail || "(no body)");
+      return null;
+    }catch(e){
+      lastApiError = "Network/CORS error reaching the Worker: " + (e && e.message ? e.message : String(e));
+      console.error("[Esidai admin] fetch failed:", e);
+      return null;
+    }
+  }
+
+  function showToast(msg, ms){
+    const t = qs("#toast");
+    t.textContent = msg;
+    t.classList.add("show");
+    setTimeout(()=>t.classList.remove("show"), ms || 2200);
+  }
+
+  /* ===== Spinner helpers ===== */
+  function showSpinner(label){
+    const s = qs("#global-spinner");
+    const l = qs("#global-spinner-label");
+    if(l) l.textContent = label || "Loading…";
+    s.hidden = false;
+    s.setAttribute("aria-hidden","false");
+  }
+  function hideSpinner(){
+    const s = qs("#global-spinner");
+    s.hidden = true;
+    s.setAttribute("aria-hidden","true");
+  }
+  function setBtnLoading(btn, loading, label){
+    if(!btn) return;
+    if(loading){
+      btn.dataset.origHtml = btn.innerHTML;
+      btn.disabled = true;
+      btn.innerHTML = '<span class="spinner-inline" aria-hidden="true"></span>' + (label || "Please wait…");
+    } else {
+      btn.disabled = false;
+      if(btn.dataset.origHtml) btn.innerHTML = btn.dataset.origHtml;
+      delete btn.dataset.origHtml;
+    }
+  }
+
+  /* ===== Auth flow ===== */
+  function showLogin(){
+    qs("#login-view").style.display = "flex";
+    qs("#admin-view").style.display = "none";
+  }
+  function showAdmin(user){
+    qs("#login-view").style.display = "none";
+    qs("#admin-view").style.display = "grid";
+    const nameEl = qs("#admin-user-name");
+    const mailEl = qs("#admin-user-email");
+    if(nameEl) nameEl.textContent = (user && user.name) || "Esidai Admin";
+    if(mailEl) mailEl.textContent = user && user.email ? user.email : "";
+    refreshFromRemote().then(()=>renderAll());
+  }
+
+  /* Look up the signed-in user in the Firestore `users` collection.
+     Tries a query on the `email` field first (your documents carry an
+     `email` field), then falls back to a document keyed by the Firebase
+     UID. Returns the user document (which contains the admin's name), or
+     null if not found, or the literal string "ERROR" if a Firestore read
+     was blocked (e.g. security rules). */
+  async function lookupAdminUser(uid, email){
+    const db = firebase.firestore();
+    const norm = (email||"").trim().toLowerCase();
+    /* 1) Query a `users` document whose `email` field matches exactly */
+    if(email){
+      try{
+        const q = await db.collection("users").where("email","==",email).limit(1).get();
+        if(!q.empty) return q.docs[0].data();
+      }catch(err){
+        console.error("[Esidai auth] 1) email-field query was blocked:", err);
+        return "ERROR";
+      }
+    }
+    /* 2) Document keyed by the Firebase UID */
+    try{
+      const snap = await db.collection("users").doc(uid).get();
+      if(snap.exists) return snap.data();
+    }catch(err){
+      console.error("[Esidai auth] 2) UID-doc read was blocked:", err);
+      return "ERROR";
+    }
+    /* 3) Document whose **ID is the email address** (e.g. users/senerwaalex@gmail.com) */
+    if(email){
+      try{
+        const snap = await db.collection("users").doc(email).get();
+        if(snap.exists) return snap.data();
+      }catch(err){
+        console.error("[Esidai auth] 3) email-doc read was blocked:", err);
+        return "ERROR";
+      }
+    }
+    /* 4) Last resort: scan all `users` docs and compare case-insensitively */
+    try{
+      const all = await db.collection("users").get();
+      for(const doc of all.docs){
+        const d = doc.data();
+        if((d.email||"").trim().toLowerCase() === norm) return d;
+      }
+    }catch(err){
+      console.error("[Esidai auth] 4) collection scan was blocked:", err);
+    }
+    console.warn("[Esidai auth] Signed in OK, but NO users doc matched.",
+      "typedEmail:", JSON.stringify(email), "authEmail:", JSON.stringify(email),
+      "uid:", uid, "filename: admin/");
+    return null;
+  }
+
+  function isAdminDoc(doc){
+    if(!doc) return false;
+    const role = doc.role || doc.Role || doc.userRole || doc.roleType || doc.adminRole || doc.role_name || doc.roleName;
+    const flag = doc.isAdmin || doc.admin || doc.canAccessAdmin;
+    if(role === "admin" || role === "owner" || role === "superadmin" || role === true) return true;
+    if(Array.isArray(doc.roles) && doc.roles.indexOf("admin")>=0) return true;
+    if(flag === true || flag === "true" || flag === "admin") return true;
+    return false;
+  }
+
+  qs("#login-form").addEventListener("submit", async (e)=>{
+    e.preventDefault();
+    const email = qs("#login-email").value.trim();
+    const password = qs("#login-password").value;
+    const emailOk = /.+@.+\..+/.test(email);
+    qs("#field-email").classList.toggle("invalid", !emailOk);
+    qs("#field-password").classList.toggle("invalid", password.length < 1);
+    if(!emailOk || password.length < 1) return;
+
+    qs("#login-error").style.display = "none";
+    if(!firebaseReady){
+      qs("#login-error").textContent = "Firebase is not ready. Check your connection and try again.";
+      qs("#login-error").style.display = "block";
+      return;
+    }
+    showSpinner("Signing in…");
+    try{
+      const cred = await firebase.auth().signInWithEmailAndPassword(email, password);
+      const authUser = cred.user;
+      /* Step 1 — confirm this user exists in the `users` collection with role "admin" */
+      const adminDoc = await lookupAdminUser(authUser.uid, email);
+      console.log("[Esidai auth] Lookup result:", adminDoc
+        ? { name: adminDoc.name, email: adminDoc.email, role: adminDoc.role, fieldNames: Object.keys(adminDoc), raw: adminDoc }
+        : adminDoc);
+      if(adminDoc === "ERROR"){
+        try{ await firebase.auth().signOut(); }catch(e){}
+        qs("#login-error").textContent = "Couldn't verify your admin role. Firebase rules may be blocking reads on the users collection. Open the browser console for details.";
+        qs("#login-error").style.display = "block";
+        return;
+      }
+      if(!isAdminDoc(adminDoc)){
+        try{ await firebase.auth().signOut(); }catch(e){}
+        qs("#login-error").textContent = "Access denied. This account is not an authorized Esidai admin.";
+        qs("#login-error").style.display = "block";
+        return;
+      }
+      currentUser = {
+        uid: authUser.uid,
+        email: authUser.email || email,
+        name: adminDoc.name || adminDoc.displayName || ""
+      };
+      showAdmin(currentUser);
+    }catch(err){
+      qs("#login-error").textContent = "We couldn't sign you in. Check your email and password and try again.";
+      qs("#login-error").style.display = "block";
+      try{ if(firebase.auth().currentUser) await firebase.auth().signOut(); }catch(e){}
+    } finally {
+      hideSpinner();
+    }
+  });
+
+  qs("#forgot-btn").addEventListener("click", async ()=>{
+    if(!firebaseReady){
+      qs("#login-error").textContent = "Firebase is not ready yet. Please refresh and try again.";
+      qs("#login-error").style.display = "block";
+      return;
+    }
+    const email = qs("#login-email").value.trim();
+    if(!/.+@.+\..+/.test(email)){
+      qs("#login-error").textContent = "Enter the email address you use to sign in, and we'll send you a reset link.";
+      qs("#login-error").style.display = "block";
+      return;
+    }
+    showSpinner("Checking admin access…");
+    try{
+      // Verify this email is in the D1 admin_users allow-list first
+      let isAdmin = false;
+      try{
+        const res = await fetch(CONFIG.API_BASE_URL.replace(/\/$/,"") + "/api/admin/check-email", {
+          method: "POST",
+          headers: {"Content-Type":"application/json"},
+          body: JSON.stringify({email: email})
+        });
+        if(res.ok){
+          const data = await res.json();
+          isAdmin = data.ok === true;
+        }
+      }catch(err){
+        console.error("[Esidai admin] admin check failed:", err);
+      }
+      if(!isAdmin){
+        qs("#login-error").style.display = "none";
+        qs("#login-error").textContent = "";
+        qs("#login-error").style.color = "var(--red)";
+        qs("#login-error").textContent = "That email is not authorized for admin access. Contact the site owner if you believe this is an error.";
+        qs("#login-error").style.display = "block";
+        return;
+      }
+      // Email is an admin — send the Firebase reset link
+      await firebase.auth().sendPasswordResetEmail(email);
+      qs("#login-error").style.display = "none";
+      qs("#login-error").textContent = "";
+      qs("#login-error").style.color = "var(--green)";
+      qs("#login-error").textContent = "Reset link sent! Check your inbox (and spam) for the password reset email.";
+      qs("#login-error").style.display = "block";
+    }catch(err){
+      const msg = err && err.code === "auth/user-not-found"
+        ? "If that email is registered, you'll receive a password reset link shortly. Check your inbox (and spam)."
+        : "We couldn't send a reset link. Check the email address and your connection, then try again.";
+      qs("#login-error").style.color = "var(--red)";
+      qs("#login-error").textContent = msg;
+      qs("#login-error").style.display = "block";
+    }finally{
+      hideSpinner();
+    }
+  });
+
+  qs("#google-login-btn").addEventListener("click", async ()=>{
+    if(!firebaseReady){
+      qs("#login-error").textContent = "Firebase is not ready yet. Please refresh and try again.";
+      qs("#login-error").style.display = "block";
+      return;
+    }
+    showSpinner("Signing in with Google…");
+    try{
+      const provider = new firebase.auth.GoogleAuthProvider();
+      provider.addScope("email");
+      provider.addScope("profile");
+      const result = await firebase.auth().signInWithPopup(provider);
+      const authUser = result.user;
+      const email = (authUser.email||"").trim();
+      if(!email){
+        qs("#login-error").textContent = "Google sign-in returned no email. Please try again.";
+        qs("#login-error").style.display = "block";
+        try{ await firebase.auth().signOut(); }catch(e){}
+        return;
+      }
+      const adminDoc = await lookupAdminUser(authUser.uid, email);
+      console.log("[Esidai auth] Google lookup:", adminDoc
+        ? { name: adminDoc.name, email: adminDoc.email, role: adminDoc.role }
+        : adminDoc);
+      if(adminDoc === "ERROR"){
+        try{ await firebase.auth().signOut(); }catch(e){}
+        qs("#login-error").textContent = "Couldn't verify your admin role. Firebase rules may be blocking reads on the users collection. Open the browser console for details.";
+        qs("#login-error").style.display = "block";
+        return;
+      }
+      if(!isAdminDoc(adminDoc)){
+        try{ await firebase.auth().signOut(); }catch(e){}
+        qs("#login-error").textContent = "Access denied. This Google account is not an authorized Esidai admin.";
+        qs("#login-error").style.display = "block";
+        return;
+      }
+      currentUser = {
+        uid: authUser.uid,
+        email: authUser.email || email,
+        name: adminDoc.name || authUser.displayName || ""
+      };
+      showAdmin(currentUser);
+    }catch(err){
+      if(err && (err.code === "auth/popup-closed-by-user" || err.code === "auth/cancelled-popup-request")){
+        qs("#login-error").style.display = "none";
+        return;
+      }
+      qs("#login-error").textContent = "We couldn't sign you in with Google. Try again, or use email + password.";
+      qs("#login-error").style.display = "block";
+    }finally{
+      hideSpinner();
+    }
+  });
+
+  qs("#logout-btn").addEventListener("click", async ()=>{
+    showSpinner("Signing out…");
+    try{
+      if(firebaseReady){ try{ await firebase.auth().signOut(); }catch(e){} }
+      currentUser = null;
+      showLogin();
+    } finally {
+      hideSpinner();
+    }
+  });
+
+  /* ===== Section navigation ===== */
+  qsa(".admin-nav-btn[data-section]").forEach(btn=>{
+    btn.addEventListener("click", ()=>{
+      qsa(".admin-nav-btn[data-section]").forEach(b=>b.setAttribute("aria-current","false"));
+      btn.setAttribute("aria-current","true");
+      qsa(".admin-section").forEach(s=>s.style.display="none");
+      qs("#section-" + btn.dataset.section).style.display = "block";
+      if(btn.dataset.section === "admin-users"){ refreshAdminUsers(); }
+      closeAdminMenu();
+    });
+  });
+
+  /* ===== Mobile side menu ===== */
+  function openAdminMenu(){
+    qs("#admin-side").classList.add("open");
+    qs("#admin-scrim").classList.add("show");
+    document.body.classList.add("admin-menu-open");
+    const t = qs("#admin-menu-toggle"); if(t) t.setAttribute("aria-expanded","true");
+  }
+  function closeAdminMenu(){
+    qs("#admin-side").classList.remove("open");
+    qs("#admin-scrim").classList.remove("show");
+    document.body.classList.remove("admin-menu-open");
+    const t = qs("#admin-menu-toggle"); if(t) t.setAttribute("aria-expanded","false");
+  }
+  const adminMenuToggle = qs("#admin-menu-toggle");
+  if(adminMenuToggle) adminMenuToggle.addEventListener("click", ()=>{
+    qs("#admin-side").classList.contains("open") ? closeAdminMenu() : openAdminMenu();
+  });
+  qs("#admin-menu-close").addEventListener("click", closeAdminMenu);
+  qs("#admin-scrim").addEventListener("click", closeAdminMenu);
+  const logoutBtnMenu = qs("#logout-btn");
+  logoutBtnMenu.addEventListener("click", closeAdminMenu);
+
+  /* ===== Rendering ===== */
+  function renderDashboard(){
+    const products = DB.products;
+    qs("#stat-total").textContent = products.length;
+    qs("#stat-active").textContent = products.filter(p=>p.status==="active").length;
+    qs("#stat-oos").textContent = products.filter(p=>p.stock_status==="out_of_stock").length;
+    qs("#stat-featured").textContent = products.filter(p=>p.featured).length;
+    const tbody = qs("#dashboard-orders-table tbody");
+    tbody.innerHTML = DB.orders.slice(0,5).map(o=>`<tr><td data-label="Reference">${escapeHtml(o.ref)}</td><td data-label="Customer">${escapeHtml(o.customer)}</td><td data-label="Total">${formatPrice(o.total)}</td><td data-label="Status">${escapeHtml(o.status||"New")}</td></tr>`).join("");
+    qs("#dashboard-orders-empty").style.display = DB.orders.length ? "none" : "block";
+  }
+
+  let productSearchTerm = "";
+  function renderProductsTable(){
+    const tbody = qs("#products-tbody");
+    const term = productSearchTerm.trim().toLowerCase();
+    const list = term
+      ? DB.products.filter(p=>(p.name||"").toLowerCase().includes(term) || (p.sku||"").toLowerCase().includes(term) || (p.category||"").toLowerCase().includes(term))
+      : DB.products;
+    if(list.length===0){
+      tbody.innerHTML = term
+        ? `<tr><td colspan="8" style="color:var(--ink-soft);padding:18px 8px">No products match "${escapeHtml(productSearchTerm)}".</td></tr>`
+        : "";
+      qs("#products-empty").style.display = term ? "none" : "block";
+      return;
+    }
+    qs("#products-empty").style.display = "none";
+    tbody.innerHTML = list.map(p=>`
+      <tr data-id="${p.id}">
+        <td data-label="Image"><img src="${(p.images&&p.images[0])||''}" alt=""></td>
+        <td data-label="Product">${escapeHtml(p.name)}</td>
+        <td data-label="Category">${escapeHtml(p.category)}</td>
+        <td data-label="Price">${(p.sale_price&&Number(p.sale_price)<Number(p.price)) ? `<span style="color:var(--red);font-weight:700">${formatPrice(p.sale_price)}</span> <s style="color:var(--ink-soft)">${formatPrice(p.price)}</s>` : formatPrice(p.price)}</td>
+        <td data-label="Stock"><span class="status-dot ${p.stock_status==='out_of_stock'?'off':''}">${p.stock_status==='out_of_stock'?'Out of stock':'In stock'}</span></td>
+        <td data-label="Featured">${p.featured?'Yes':'No'}</td>
+        <td data-label="Status"><span class="status-dot ${p.status!=='active'?'off':''}">${p.status==='active'?'Active':'Inactive'}</span></td>
+        <td data-label="Actions">
+          <button type="button" class="btn btn-outline btn-sm view-product-btn">View</button>
+          <button class="btn btn-outline btn-sm edit-product-btn">Edit</button>
+          <button class="btn btn-outline btn-sm feature-product-btn">${p.featured ? 'Unfeature' : 'Feature'}</button>
+          <button class="btn btn-danger btn-sm delete-product-btn">Delete</button>
+        </td>
+      </tr>`).join("");
+  }
+
+  function renderCategoriesTable(){
+    const tbody = qs("#categories-tbody");
+    tbody.innerHTML = DB.categories.map(c=>`
+      <tr data-id="${c.id}">
+        <td data-label="Category">${escapeHtml(c.name)}</td>
+        <td data-label="Slug">${escapeHtml(c.slug)}</td>
+        <td data-label="Description">${escapeHtml(c.description||"")}</td>
+        <td data-label="Status"><span class="status-dot">${c.status!=='inactive'?'Active':'Inactive'}</span></td>
+        <td data-label="Actions">
+          <button class="btn btn-outline btn-sm edit-category-btn">Edit</button>
+          <button class="btn btn-danger btn-sm delete-category-btn">Delete</button>
+        </td>
+      </tr>`).join("");
+  }
+
+  function renderOrdersTable(){
+    const tbody = qs("#orders-tbody");
+    tbody.innerHTML = DB.orders.map(o=>`<tr data-id="${o.id}">
+      <td data-label="Order ID">${escapeHtml(o.ref||"")}</td>
+      <td data-label="Customer">${escapeHtml(o.customer||"")}</td>
+      <td data-label="Actions">
+        <button type="button" class="btn btn-outline btn-sm view-order-btn">View</button>
+      </td>
+    </tr>`).join("");
+    qs("#orders-empty").style.display = DB.orders.length ? "none" : "block";
+  }
+
+  /* Order click → open detail overlay */
+  const ordersTbody = qs("#orders-tbody");
+  if(ordersTbody){
+    ordersTbody.addEventListener("click", (e)=>{
+      const btn = e.target.closest(".view-order-btn");
+      if(!btn) return;
+      const row = btn.closest("tr[data-id]");
+      if(!row) return;
+      const id = row.dataset.id;
+      const order = DB.orders.find(o=>String(o.id)===String(id));
+      if(order) openOrderView(order);
+    });
+  }
+
+  function populateCategorySelect(){
+    const sel = qs("#p-category");
+    sel.innerHTML = DB.categories.map(c=>`<option value="${c.slug}" data-name="${escapeHtml(c.name)}">${escapeHtml(c.name)}</option>`).join("");
+  }
+
+  function renderAll(){
+    renderDashboard();
+    renderProductsTable();
+    renderCategoriesTable();
+    renderOrdersTable();
+    populateCategorySelect();
+    renderAdminUsersTable();
+  }
+
+  /* ===== Admin Users ===== */
+  function renderAdminUsersTable(){
+    const tbody = qs("#admin-users-tbody");
+    if(!DB.adminUsers || !DB.adminUsers.length){
+      qs("#admin-users-empty").style.display = "block";
+      tbody.innerHTML = "";
+      return;
+    }
+    qs("#admin-users-empty").style.display = "none";
+    tbody.innerHTML = DB.adminUsers.map(u=>`<tr data-id="${u.id}">
+      <td data-label="Name">${escapeHtml(u.name||"")}</td>
+      <td data-label="Email">${escapeHtml(u.email||"")}</td>
+      <td data-label="Role">${escapeHtml(u.role||"admin")}</td>
+      <td data-label="Actions">
+        <button class="btn btn-danger btn-sm delete-admin-btn" data-id="${u.id}">Remove</button>
+      </td>
+    </tr>`).join("");
+  }
+
+  async function refreshAdminUsers(){
+    try{
+      const users = await adminApi("GET", "/api/admin/users");
+      if(Array.isArray(users)){ DB.adminUsers = users; saveAdminDB(DB); }
+    }catch(err){ console.error("[Esidai admin] admin users refresh failed:", err); }
+  }
+
+  qs("#admin-user-form").addEventListener("submit", async (e)=>{
+    e.preventDefault();
+    const email = qs("#au-email").value.trim().toLowerCase();
+    const name = qs("#au-name").value.trim();
+    const password = qs("#au-password").value;
+    const errEl = qs("#au-error");
+    const okEl = qs("#au-success");
+    errEl.style.display = "none";
+    okEl.style.display = "none";
+    if(!/.+@.+\..+/.test(email)){
+      errEl.textContent = "Please enter a valid email address.";
+      errEl.style.display = "block";
+      return;
+    }
+    if(name.length < 2){
+      errEl.textContent = "Please enter the full name.";
+      errEl.style.display = "block";
+      return;
+    }
+    if(password.length < 6){
+      errEl.textContent = "Password must be at least 6 characters.";
+      errEl.style.display = "block";
+      return;
+    }
+    showSpinner("Creating admin account…");
+    try{
+      // 1) Create the Firebase Auth account using the Firebase REST API
+      const fbRes = await fetch(`https://identitytoolkit.googleapis.com/v1/accounts:signUp?key=${CONFIG.FIREBASE_API_KEY}`, {
+        method: "POST",
+        headers: {"Content-Type":"application/json"},
+        body: JSON.stringify({email: email, password: password, returnSecureToken: true})
+      });
+      if(!fbRes.ok){
+        const fbErr = await fbRes.json().catch(() => ({}));
+        const msg = fbErr.error?.message || "Firebase account creation throw";
+        const friendly = msg === "EMAIL_EXISTS"
+          ? "A Firebase account with that email already exists."
+          : `Could not create Firebase account: ${msg}`;
+        errEl.textContent = friendly;
+        errEl.style.display = "block";
+        return;
+      }
+      // 2) Add to D1 admin_users allow-list via the Worker
+      const result = await adminApi("POST", "/api/admin/users", {email: email, name: name, role: "admin"});
+      if(result && result.ok){
+        DB.adminUsers = DB.adminUsers || [];
+        DB.adminUsers.push({id: result.id, email: email, name: name, role: "admin"});
+        saveAdminDB(DB);
+        renderAdminUsersTable();
+        qs("#admin-user-form").reset();
+        okEl.textContent = `Admin account created for ${email}. The user can sign in with the temporary password.`;
+        okEl.style.display = "block";
+      }else{
+        errEl.textContent = (result && result.error) || "Could not add to admin allow-list.";
+        errEl.style.display = "block";
+      }
+    }catch(err){
+      console.error("[Esidai admin] admin user creation failed:", err);
+      errEl.textContent = "Something went wrong. Check the console for details.";
+      errEl.style.display = "block";
+    }finally{
+      hideSpinner();
+    }
+  });
+
+  qs("#admin-users-tbody").addEventListener("click", async (e)=>{
+    const btn = e.target.closest(".delete-admin-btn");
+    if(!btn) return;
+    const id = btn.dataset.id;
+    const row = btn.closest("tr");
+    const email = row ? row.querySelector("td:nth-child(2)")?.textContent : "this user";
+    if(!confirm(`Remove admin access for ${email}? This removes them from the D1 allow-list but does NOT delete their Firebase account.`)) return;
+    showSpinner("Removing…");
+    try{
+      await adminApi("DELETE", "/api/admin/users/"+id);
+      DB.adminUsers = DB.adminUsers.filter(u=>String(u.id)!==String(id));
+      saveAdminDB(DB);
+      renderAdminUsersTable();
+      showToast("Admin user removed.");
+    }catch(err){
+      showToast("Could not remove admin user.");
+    }finally{
+      hideSpinner();
+    }
+  });
+
+  /* ===== Product modal ===== */
+  let uploadedImages = [];
+  /* Each category owns its own SKU namespace, so two categories must never
+     share a prefix. (home-decor used to share "HD" with hoodies.) */
+  const SKU_PREFIXES = { necks:"NK", necklaces:"NK", bracelets:"BR", earrings:"ER", "home-decor":"HM", gifts:"GF", accessories:"AC", caps:"CAP", "t-shirts":"TS", hoodies:"HD", "cultural-creations":"CC" };
+  /* True while #p-sku still holds an auto-generated value, so changing the
+     category refreshes it without overwriting a manually typed SKU. */
+  let skuIsAuto = true;
+  /* Next SKU for the selected category = highest existing number + 1.
+     The previous version used 101 + (count of matching SKUs), which collides
+     whenever the numbering has a gap: a database holding only ESC-BR-102
+     counted 1 match and therefore produced ESC-BR-102 again, and D1 rejected
+     the insert with "UNIQUE constraint failed: products.sku". */
+  function generateSku(){
+    const catSlug = qs("#p-category").value || "";
+    let prefix = SKU_PREFIXES[catSlug] || (catSlug ? catSlug.toUpperCase().replace(/[^A-Z0-9]/g,"").slice(0,2) : "PR");
+    if(!prefix) prefix = "PR";
+    const head = "ESC-" + prefix + "-";
+    let max = 100;
+    (DB.products||[]).forEach(p=>{
+      const sku = String((p && p.sku) || "");
+      if(!sku.startsWith(head)) return;
+      const n = parseInt(sku.slice(head.length), 10);
+      if(isFinite(n) && n > max) max = n;
+    });
+    return head + (max + 1);
+  }
+  /* ESC-BR-102 → ESC-BR-103. Used when D1 rejects a SKU as already taken: the
+     admin's product list only holds ACTIVE products, so a SKU owned by an
+     inactive row is invisible here and cannot be avoided in advance. */
+  function bumpSku(sku){
+    const s = String(sku == null ? "" : sku);
+    const m = s.match(/^(.*?)(\d+)$/);
+    return m ? (m[1] + (parseInt(m[2], 10) + 1)) : ((s || "ESC-PR-") + "1");
+  }
+  /* hand-beaded-bag → hand-beaded-bag-2 (same invisibility caveat as SKUs) */
+  function bumpSlug(slug){
+    const s = String(slug == null ? "" : slug);
+    const m = s.match(/^(.*?)-(\d+)$/);
+    return m ? (m[1] + "-" + (parseInt(m[2], 10) + 1)) : ((s || "product") + "-2");
+  }
+  const skuGenBtn = qs("#p-sku-gen");
+  if(skuGenBtn) skuGenBtn.addEventListener("click", ()=>{ qs("#p-sku").value = generateSku(); skuIsAuto = true; });
+  /* Typing in the SKU box takes ownership away from the auto-generator. */
+  const skuInput = qs("#p-sku");
+  if(skuInput) skuInput.addEventListener("input", ()=>{ skuIsAuto = false; });
+  /* Switching category re-allocates the prefix while the value is still ours.
+     Note .value is assigned programmatically in openProductModal, which fires
+     no "change" event, so editing an existing product never rewrites its SKU. */
+  const skuCategorySel = qs("#p-category");
+  if(skuCategorySel) skuCategorySel.addEventListener("change", ()=>{ if(skuIsAuto) qs("#p-sku").value = generateSku(); });
+  function openProductModal(product){
+    qs("#product-form").reset();
+    uploadedImages = product ? (product.images||[]).slice() : [];
+    renderUploadThumbs();
+    qs("#product-modal-title").textContent = product ? "Edit Product" : "Add Product";
+    qs("#p-id").value = product ? product.id : "";
+    qs("#p-name").value = product ? product.name : "";
+    qs("#p-slug").value = product ? product.slug : "";
+    populateCategorySelect();
+    qs("#p-category").value = product ? product.category_slug : (DB.categories[0]?DB.categories[0].slug:"");
+    qs("#p-price").value = product ? product.price : "";
+    qs("#p-sale-price").value = product ? (product.sale_price||"") : "";
+    qs("#p-sku").value = product ? (product.sku || "") : generateSku();
+    /* Editing keeps that product's own SKU (changing its category must never
+       rewrite it); a new product starts in auto mode so picking a category
+       re-allocates the SKU from the new prefix. */
+    skuIsAuto = !product;
+    qs("#p-stock").value = product ? product.stock_status : "in_stock";
+    qs("#p-short").value = product ? product.short_description : "";
+    qs("#p-desc").value = product ? product.description : "";
+    qs("#p-featured-toggle").setAttribute("aria-pressed", product ? String(!!product.featured) : "false");
+    qs("#p-active-toggle").setAttribute("aria-pressed", product ? String(product.status==="active") : "true");
+    qs("#product-modal").classList.add("open");
+  }
+  function closeProductModal(){ qs("#product-modal").classList.remove("open"); }
+  qs("#new-product-btn").addEventListener("click", ()=>openProductModal(null));
+  qs("#product-modal-close").addEventListener("click", closeProductModal);
+
+  /* ===== Product quick view ===== */
+  let viewedProduct = null;
+  function openProductView(p){
+    if(!p) return;
+    viewedProduct = p;
+    const imgs = (Array.isArray(p.images) ? p.images : []).filter(Boolean);
+    qs("#pv-name").textContent = p.name || "Untitled product";
+    qs("#pv-price").innerHTML = (p.sale_price && Number(p.sale_price) < Number(p.price))
+      ? `<span style="color:var(--red);font-weight:700">${formatPrice(p.sale_price)}</span> <s style="color:var(--ink-soft)">${formatPrice(p.price)}</s>`
+      : formatPrice(p.price);
+    qs("#pv-category").textContent = p.category || "—";
+    qs("#pv-sku").textContent = p.sku || "—";
+    qs("#pv-stock").innerHTML = `<span class="status-dot ${p.stock_status==='out_of_stock'?'off':''}">${p.stock_status==='out_of_stock'?'Out of stock':'In stock'}</span>`;
+    qs("#pv-status").innerHTML = `<span class="status-dot ${p.status!=='active'?'off':''}">${p.status==='active'?'Active':'Inactive'}</span>`;
+    qs("#pv-featured").textContent = p.featured ? "Yes" : "No";
+    qs("#pv-slug").textContent = p.slug || "—";
+    qs("#pv-short").textContent = p.short_description || "";
+    qs("#pv-desc").textContent = p.description || "";
+    const main = qs("#pv-main");
+    main.src = imgs[0] || "";
+    main.alt = p.alt || p.name || "Product image";
+    qs("#pv-thumbs").innerHTML = imgs.map((src,i)=>`<img src="${escapeHtml(src)}" alt="" class="${i===0?'active':''}" data-i="${i}">`).join("");
+    qs("#pv-live-link").href = "product/?slug=" + encodeURIComponent(p.slug||"");
+    qs("#product-view-modal").classList.add("open");
+  }
+  function closeProductView(){ qs("#product-view-modal").classList.remove("open"); }
+  qs("#product-view-close").addEventListener("click", closeProductView);
+  qs("#product-view-modal").addEventListener("click", (e)=>{
+    if(e.target === qs("#product-view-modal")) closeProductView();
+  });
+  qs("#pv-thumbs").addEventListener("click", (e)=>{
+    const t = e.target.closest("img[data-i]");
+    if(!t) return;
+    qs("#pv-main").src = t.src;
+    qsa("#pv-thumbs img").forEach(x=>x.classList.toggle("active", x===t));
+  });
+  qs("#pv-edit-btn").addEventListener("click", ()=>{
+    const p = viewedProduct;
+    closeProductView();
+    openProductModal(p || null);
+  });
+  qs("#p-featured-toggle").addEventListener("click", (e)=>{
+    e.target.setAttribute("aria-pressed", e.target.getAttribute("aria-pressed")!=="true");
+  });
+  qs("#p-active-toggle").addEventListener("click", (e)=>{
+    e.target.setAttribute("aria-pressed", e.target.getAttribute("aria-pressed")!=="true");
+  });
+
+  /* ===== Order detail overlay ===== */
+  let viewedOrder = null;
+  function openOrderView(o){
+    if(!o) return;
+    viewedOrder = o;
+    qs("#ov-ref").textContent = o.ref ? "#" + o.ref : "Order";
+    qs("#ov-customer").textContent = o.customer || "—";
+    qs("#ov-phone").textContent = o.phone || "—";
+    qs("#ov-location").textContent = o.location || "—";
+    qs("#ov-total").textContent = formatPrice(o.total);
+    qs("#ov-item-count").textContent = String(o.items || 0);
+    qs("#ov-notes").textContent = (o.notes && o.notes.trim()) ? o.notes : "—";
+    qs("#ov-status").value = o.status || "new";
+    const items = Array.isArray(o.lineItems) ? o.lineItems : [];
+    const itemsHtml = items.length ? items.map(li=>`<div class="ov-item"><div><div class="ov-item-name">${escapeHtml(li.name||"")}</div><div class="ov-item-meta">${formatPrice(li.price||0)} × ${li.qty||1}</div></div><div class="ov-item-total">${formatPrice((li.price||0)*(li.qty||1))}</div></div>`).join("") : "<p class='hint'>No items recorded.</p>";
+    qs("#ov-items").innerHTML = itemsHtml + `<div class="ov-grand"><span>Total</span><span>${formatPrice(o.total)}</span></div>`;
+    qs("#order-view-modal").classList.add("open");
+  }
+  function closeOrderView(){ qs("#order-view-modal").classList.remove("open"); }
+  qs("#order-view-close").addEventListener("click", closeOrderView);
+  qs("#order-view-modal").addEventListener("click", (e)=>{
+    if(e.target === qs("#order-view-modal")) closeOrderView();
+  });
+  qs("#ov-status").addEventListener("change", async ()=>{
+    if(!viewedOrder) return;
+    const status = qs("#ov-status").value;
+    const remoteResult = await adminApi("PUT", "/api/admin/orders/"+viewedOrder.id, {status:status});
+    DB.orders = DB.orders.map(o=>String(o.id)===String(viewedOrder.id) ? Object.assign({}, o, {status:status}) : o);
+    viewedOrder = Object.assign({}, viewedOrder, {status:status});
+    saveAdminDB(DB);
+    showToast(remoteResult ? "Order status updated." : "Status saved locally (connect your Worker API to publish live).");
+  });
+
+  
+
+  function renderUploadThumbs(){
+    qs("#upload-thumbs").innerHTML = uploadedImages.map((src,i)=>`<div class="t" data-i="${i}"><img src="${src}" alt=""><button type="button" aria-label="Remove image">&times;</button></div>`).join("");
+  }
+  qs("#upload-thumbs").addEventListener("click",(e)=>{
+    const btn = e.target.closest("button");
+    if(!btn) return;
+    const i = Number(btn.closest(".t").dataset.i);
+    uploadedImages.splice(i,1);
+    renderUploadThumbs();
+  });
+
+  /* Cloudflare Images upload — requires the Worker's upload endpoint.
+     Flow: file -> Worker -> Cloudflare Images -> delivery URL -> stored on product.
+     Falls back to a local object URL preview when the Worker isn't configured,
+     so the admin UI remains testable before deployment. */
+  qs("#image-input").addEventListener("change", async (e)=>{
+    const files = Array.from(e.target.files||[]);
+    const configured = CONFIG.API_BASE_URL && !/YOUR-CLOUDFLARE-WORKER-URL/.test(CONFIG.API_BASE_URL);
+    for(const file of files){
+      if(configured){
+        try{
+          const token = await getIdToken();
+          const formData = new FormData();
+          formData.append("file", file);
+          const res = await fetch(CONFIG.API_BASE_URL.replace(/\/$/,"") + "/api/admin/uploads", {
+            method:"POST",
+            headers: token ? {"Authorization":"Bearer "+token} : {},
+            body: formData
+          });
+          if(res.ok){
+            const data = await res.json();
+            uploadedImages.push(data.url);
+            continue;
+          }
+        }catch(err){}
+      }
+      uploadedImages.push(URL.createObjectURL(file));
+    }
+    renderUploadThumbs();
+  });
+
+  qs("#product-form").addEventListener("submit", async (e)=>{
+    e.preventDefault();
+    const submitBtn = e.currentTarget.querySelector('button[type="submit"]');
+    setBtnLoading(submitBtn, true, "Saving…");
+    try{
+      const id = qs("#p-id").value ? Number(qs("#p-id").value) : Date.now();
+      const catSel = qs("#p-category");
+      const categoryName = catSel.options[catSel.selectedIndex] ? catSel.options[catSel.selectedIndex].dataset.name : "";
+      const name = qs("#p-name").value.trim();
+      const slug = (qs("#p-slug").value.trim() || slugify(name));
+      const product = {
+        id, name, slug,
+        category: categoryName, category_slug: catSel.value,
+        price: Number(qs("#p-price").value)||0,
+        sale_price: qs("#p-sale-price").value.trim(),
+        sku: (qs("#p-sku").value.trim() || generateSku()),
+        status: qs("#p-active-toggle").getAttribute("aria-pressed")==="true" ? "active" : "inactive",
+        featured: qs("#p-featured-toggle").getAttribute("aria-pressed")==="true",
+        stock_status: qs("#p-stock").value,
+        short_description: qs("#p-short").value.trim(),
+        description: qs("#p-desc").value.trim(),
+        images: uploadedImages.length ? uploadedImages : ["https://images.unsplash.com/photo-1611591437281-460bfbe1220a?q=80&w=1200&auto=format&fit=crop"],
+        alt: name + " - handcrafted by Esidai Savanna Creations",
+        seo_title: name + " | Esidai Savanna Creations",
+        seo_description: "Shop " + name + " — authentic handcrafted Maasai beadwork from Esidai Savanna Creations, Kenya."
+      };
+
+      const existingIdx = DB.products.findIndex(p=>p.id===id);
+      const apiConfigured = CONFIG.API_BASE_URL && !/YOUR-CLOUDFLARE-WORKER-URL/.test(CONFIG.API_BASE_URL);
+      const isEdit = existingIdx>=0;
+      /* Publish, self-healing on a duplicate SKU/slug. generateSku() can only
+         see the products this panel knows about, and /api/products returns
+         ACTIVE rows only — so a SKU held by an inactive product is invisible
+         here and cannot be avoided in advance. D1 is the only authority, so we
+         treat its conflict as the answer and retry with the next free number
+         instead of making the user guess. */
+      let remoteResult = null;
+      for(let attempt = 0; attempt < 4; attempt++){
+        remoteResult = await adminApi(
+          isEdit ? "PUT" : "POST",
+          isEdit ? "/api/admin/products/"+id : "/api/admin/products",
+          product
+        );
+        if(remoteResult) break;
+        if(lastApiErrorCode !== "DUPLICATE") break;
+        if(lastApiErrorField === "products.sku"){
+          const nextSku = bumpSku(product.sku);
+          product.sku = nextSku;
+          qs("#p-sku").value = nextSku;
+          skuIsAuto = true;
+          showToast("That SKU was already taken — saving as " + nextSku + " instead.", 5000);
+        } else if(lastApiErrorField === "products.slug"){
+          const nextSlug = bumpSlug(product.slug);
+          product.slug = nextSlug;
+          qs("#p-slug").value = nextSlug;
+          showToast("That URL slug was already taken — saving as " + nextSlug + " instead.", 5000);
+        } else {
+          break;
+        }
+      }
+
+      /* A rejected publish must never be reported as a success — otherwise the
+         product appears in this list while never existing in the live D1
+         database. Leave the modal open so the details can be corrected. */
+      if(apiConfigured && remoteResult === null){
+        showToast(lastApiError || "Could not save the product.", 7000);
+        return;
+      }
+
+      /* D1 owns the real id. Without adopting it, a later edit PUTs a
+         client-side timestamp and silently updates zero rows. */
+      if(remoteResult && remoteResult.id) product.id = remoteResult.id;
+
+      if(isEdit) DB.products[existingIdx] = product;
+      else DB.products.push(product);
+      saveAdminDB(DB);
+      renderAll();
+      closeProductModal();
+      showToast(remoteResult ? "Product saved to your store." : "Saved locally — connect your Worker API to publish live.");
+    } finally {
+      setBtnLoading(submitBtn, false);
+    }
+  });
+
+  const productSearch = qs("#product-search");
+  if(productSearch) productSearch.addEventListener("input", ()=>{
+    productSearchTerm = productSearch.value;
+    renderProductsTable();
+  });
+
+  qs("#products-tbody").addEventListener("click", async (e)=>{
+    const row = e.target.closest("tr");
+    if(!row) return;
+    const id = Number(row.dataset.id);
+    if(e.target.closest(".view-product-btn")){
+      openProductView(DB.products.find(p=>p.id===id));
+    }
+    if(e.target.closest(".edit-product-btn")){
+      openProductModal(DB.products.find(p=>p.id===id));
+    }
+    if(e.target.closest(".feature-product-btn")){
+      const p = DB.products.find(x=>x.id===id);
+      if(!p) return;
+      const updated = Object.assign({}, p, { featured: !p.featured });
+      const remoteResult = await adminApi("PUT", "/api/admin/products/"+id, updated);
+      DB.products = DB.products.map(x=>x.id===id ? updated : x);
+      saveAdminDB(DB);
+      renderAll();
+      showToast(updated.featured
+        ? (remoteResult ? "Product featured — now showing on the homepage." : "Featured flag saved locally (connect your Worker API to publish live).")
+        : (remoteResult ? "Product removed from featured." : "Feature change saved locally (connect your Worker API to publish live)."));
+    }
+    if(e.target.closest(".delete-product-btn")){
+      if(!confirm("Delete this product? This cannot be undone.")) return;
+      showSpinner("Deleting…");
+      try{
+        await adminApi("DELETE", "/api/admin/products/"+id);
+        DB.products = DB.products.filter(p=>p.id!==id);
+        saveAdminDB(DB);
+        renderAll();
+        showToast("Product deleted.");
+      } finally {
+        hideSpinner();
+      }
+    }
+  });
+
+  /* ===== Category modal ===== */
+  function openCategoryModal(category){
+    qs("#category-form").reset();
+    qs("#category-modal-title").textContent = category ? "Edit Category" : "Add Category";
+    qs("#c-id").value = category ? category.id : "";
+    qs("#c-name-f").value = category ? category.name : "";
+    qs("#c-slug-f").value = category ? category.slug : "";
+    qs("#c-desc-f").value = category ? category.description : "";
+    qs("#c-seo-title-f").value = category ? (category.seo_title||"") : "";
+    qs("#c-seo-desc-f").value = category ? (category.seo_description||"") : "";
+    qs("#category-modal").classList.add("open");
+  }
+  function closeCategoryModal(){ qs("#category-modal").classList.remove("open"); }
+  qs("#new-category-btn").addEventListener("click", ()=>openCategoryModal(null));
+  qs("#category-modal-close").addEventListener("click", closeCategoryModal);
+
+  qs("#category-form").addEventListener("submit", async (e)=>{
+    e.preventDefault();
+    const submitBtn = e.currentTarget.querySelector('button[type="submit"]');
+    setBtnLoading(submitBtn, true, "Saving…");
+    try{
+      const id = qs("#c-id").value ? Number(qs("#c-id").value) : Date.now();
+      const name = qs("#c-name-f").value.trim();
+      const category = {
+        id, name,
+        slug: qs("#c-slug-f").value.trim() || slugify(name),
+        description: qs("#c-desc-f").value.trim(),
+        seo_title: qs("#c-seo-title-f").value.trim(),
+        seo_description: qs("#c-seo-desc-f").value.trim(),
+        status: "active"
+      };
+      const existingIdx = DB.categories.findIndex(c=>c.id===id);
+      const remoteResult = existingIdx>=0
+        ? await adminApi("PUT", "/api/admin/categories/"+id, category)
+        : await adminApi("POST", "/api/admin/categories", category);
+      if(existingIdx>=0) DB.categories[existingIdx] = category;
+      else DB.categories.push(category);
+      saveAdminDB(DB);
+      renderAll();
+      closeCategoryModal();
+      showToast(remoteResult ? "Category saved to your store." : "Category saved locally (connect your Worker API to publish live).");
+    } finally {
+      setBtnLoading(submitBtn, false);
+    }
+  });
+
+  qs("#categories-tbody").addEventListener("click", async (e)=>{
+    const row = e.target.closest("tr");
+    if(!row) return;
+    const id = Number(row.dataset.id);
+    if(e.target.closest(".edit-category-btn")){
+      openCategoryModal(DB.categories.find(c=>c.id===id));
+    }
+    if(e.target.closest(".delete-category-btn")){
+      if(!confirm("Delete this category?")) return;
+      showSpinner("Deleting…");
+      try{
+        await adminApi("DELETE", "/api/admin/categories/"+id);
+        DB.categories = DB.categories.filter(c=>c.id!==id);
+        saveAdminDB(DB);
+        renderAll();
+        showToast("Category deleted.");
+      } finally {
+        hideSpinner();
+      }
+    }
+  });
+
+  /* ===== Settings ===== */
+  qs("#settings-form").addEventListener("submit", async (e)=>{
+    e.preventDefault();
+    const submitBtn = e.currentTarget.querySelector('button[type="submit"]');
+    setBtnLoading(submitBtn, true, "Saving…");
+    try{
+      const settings = {
+        name: qs("#s-name").value.trim(),
+        tagline: qs("#s-tagline").value.trim(),
+        whatsapp: qs("#s-whatsapp").value.trim(),
+        currency: qs("#s-currency").value.trim(),
+        description: qs("#s-description").value.trim()
+      };
+      const remoteResult = await adminApi("PUT", "/api/admin/settings", settings);
+      showToast(remoteResult ? "Settings saved." : "Not saved to Worker — " + (lastApiError || "Worker API not connected."));
+    } finally {
+      setBtnLoading(submitBtn, false);
+    }
+  });
+
+  /* ===== Boot ===== */
+  (async function boot(){
+    await loadFirebase();
+    if(firebaseReady){
+      firebase.auth().onAuthStateChanged(async (user)=>{
+        if(!user){ showLogin(); return; }
+        const adminDoc = await lookupAdminUser(user.uid, user.email || "");
+        if(!isAdminDoc(adminDoc)){
+          try{ await firebase.auth().signOut(); }catch(e){}
+          showLogin();
+          return;
+        }
+        currentUser = {
+          uid: user.uid,
+          email: user.email || "",
+          name: adminDoc.name || adminDoc.displayName || ""
+        };
+        showAdmin(currentUser);
+      });
+    } else {
+      showLogin();
+    }
+  })();
+
+  </script>
+</body>
+</html>

@@ -1,0 +1,46 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!--
+  Esidai Savanna Creations — starter sitemap.
+
+  This file lists the site's static, always-indexable pages. Because
+  products and categories are dynamic (stored in Cloudflare D1), the
+  Cloudflare Worker should extend this sitemap automatically — e.g. a
+  GET /sitemap.xml route on the Worker that appends one <url> entry per
+  active product (using its canonical product/?slug=... URL) and per
+  active category, regenerated whenever products change. Do not include
+  cart/, checkout/ or admin/.
+-->
+<urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9">
+  <url>
+    <loc>https://esidaisavannacreations.shop/</loc>
+    <changefreq>weekly</changefreq>
+    <priority>1.0</priority>
+  </url>
+  <url>
+    <loc>https://esidaisavannacreations.shop/shop/</loc>
+    <changefreq>daily</changefreq>
+    <priority>0.9</priority>
+  </url>
+  <url>
+    <loc>https://esidaisavannacreations.shop/about/</loc>
+    <changefreq>monthly</changefreq>
+    <priority>0.5</priority>
+  </url>
+  <url>
+    <loc>https://esidaisavannacreations.shop/contact/</loc>
+    <changefreq>monthly</changefreq>
+    <priority>0.5</priority>
+  </url>
+  <!--
+  <url>
+    <loc>https://esidaisavannacreations.shop/shop/?category=necklaces</loc>
+    <changefreq>weekly</changefreq>
+    <priority>0.7</priority>
+  </url>
+  <url>
+    <loc>https://esidaisavannacreations.shop/product/?slug=maasai-beaded-collar-necklace</loc>
+    <changefreq>weekly</changefreq>
+    <priority>0.8</priority>
+  </url>
+  -- Worker: repeat one <url> block per active category / product here. -->
+</urlset>

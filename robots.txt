@@ -1,0 +1,15 @@
+# Esidai Savanna Creations — robots.txt
+# Place this file at the root of your deployed domain, e.g.
+# https://esidaisavannacreations.shop/robots.txt
+
+User-agent: *
+Allow: /
+
+# Keep the admin app and cart/checkout flows out of the index.
+# (cart/ and checkout/ also carry <meta name="robots"> tags
+# directly, as an extra safeguard.)
+Disallow: /admin/
+Disallow: /cart/
+Disallow: /checkout/
+
+Sitemap: https://esidaisavannacreations.shop/sitemap.xml
