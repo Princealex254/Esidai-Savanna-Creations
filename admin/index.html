@@ -1229,11 +1229,57 @@ document.addEventListener("DOMContentLoaded", initHeader);
     }catch(err){
       console.error("[Esidai auth] 4) collection scan was blocked:", err);
     }
-    console.warn("[Esidai auth] Signed in OK, but NO users doc matched.",
+    console.warn("[Esidai auth] Signed in, but no Firestore `users` doc matched. (This is NOT an error if the email is in the D1 admin_users allow-list.)",
       "typedEmail:", JSON.stringify(email), "authEmail:", JSON.stringify(email),
       "uid:", uid, "filename: admin/");
     return null;
   }
+
+  /* The authoritative admin allow-list is the D1 `admin_users` table — the same
+     one the Worker's requireAdmin() checks on every /api/admin/* call. The
+     Firestore lookup above is only consulted to enrich the profile (display
+     name), so a missing Firestore `users` doc no longer blocks sign-in. */
+  async function checkD1Admin(email){
+    const norm = (email || "").trim().toLowerCase();
+    if(!norm) return { ok: false, name: "" };
+    try{
+      const base = (typeof CONFIG !== "undefined" && CONFIG.API_BASE_URL)
+        ? CONFIG.API_BASE_URL.replace(/\/$/, "") : "";
+      if(!base) return { ok: false, name: "" };
+      const res = await fetch(base + "/api/admin/check-email", {
+        method: "POST",
+        headers: { "Content-Type": "application/json" },
+        body: JSON.stringify({ email: norm })
+      });
+      if(!res.ok){
+        console.error("[Esidai auth] D1 allow-list check returned HTTP", res.status);
+        return { ok: false, name: "" };
+      }
+      const data = await res.json().catch(()=>({}));
+      return { ok: data.ok === true, name: data.name || "", role: data.role || "" };
+    }catch(err){
+      console.error("[Esidai auth] D1 allow-list check failed:", err);
+      return { ok: false, name: "", unreachable: true };
+    }
+  }
+
+  /* Combined sign-in gate:
+     allowed = email is in D1 admin_users  OR  Firestore users doc has admin role.
+     Returns { allowed, name, firestoreBlocked }. */
+  async function resolveAdminAccess(uid, email){
+    const d1 = await checkD1Admin(email);
+    const doc = await lookupAdminUser(uid, email);
+    const firestoreBlocked = (doc === "ERROR");
+    const fsDoc = firestoreBlocked ? null : doc;
+    const allowed = d1.ok === true || isAdminDoc(fsDoc);
+    const name = (fsDoc && (fsDoc.name || fsDoc.displayName)) || d1.name || "";
+    console.log("[Esidai auth] Access check:", {
+      allowed, d1AllowList: d1.ok, firestoreDoc: !!fsDoc,
+      firestoreBlocked, name, uid, email
+    });
+    return { allowed, name, firestoreBlocked };
+  }
+
 
   function isAdminDoc(doc){
     if(!doc) return false;
@@ -1264,27 +1310,20 @@ document.addEventListener("DOMContentLoaded", initHeader);
     try{
       const cred = await firebase.auth().signInWithEmailAndPassword(email, password);
       const authUser = cred.user;
-      /* Step 1 — confirm this user exists in the `users` collection with role "admin" */
-      const adminDoc = await lookupAdminUser(authUser.uid, email);
-      console.log("[Esidai auth] Lookup result:", adminDoc
-        ? { name: adminDoc.name, email: adminDoc.email, role: adminDoc.role, fieldNames: Object.keys(adminDoc), raw: adminDoc }
-        : adminDoc);
-      if(adminDoc === "ERROR"){
+      /* Step 1 — authorize: D1 admin_users allow-list OR Firestore admin doc */
+      const access = await resolveAdminAccess(authUser.uid, email);
+      if(!access.allowed){
         try{ await firebase.auth().signOut(); }catch(e){}
-        qs("#login-error").textContent = "Couldn't verify your admin role. Firebase rules may be blocking reads on the users collection. Open the browser console for details.";
-        qs("#login-error").style.display = "block";
-        return;
-      }
-      if(!isAdminDoc(adminDoc)){
-        try{ await firebase.auth().signOut(); }catch(e){}
-        qs("#login-error").textContent = "Access denied. This account is not an authorized Esidai admin.";
+        qs("#login-error").textContent = access.firestoreBlocked
+          ? "Access denied, and Firestore reads are blocked. Make sure this email is in the D1 admin_users table (or fix your Firestore rules), then try again."
+          : "Access denied. This account is not an authorized Esidai admin — its email must be present in the D1 admin_users table.";
         qs("#login-error").style.display = "block";
         return;
       }
       currentUser = {
         uid: authUser.uid,
         email: authUser.email || email,
-        name: adminDoc.name || adminDoc.displayName || ""
+        name: access.name || ""
       };
       showAdmin(currentUser);
     }catch(err){
@@ -1372,26 +1411,20 @@ document.addEventListener("DOMContentLoaded", initHeader);
         try{ await firebase.auth().signOut(); }catch(e){}
         return;
       }
-      const adminDoc = await lookupAdminUser(authUser.uid, email);
-      console.log("[Esidai auth] Google lookup:", adminDoc
-        ? { name: adminDoc.name, email: adminDoc.email, role: adminDoc.role }
-        : adminDoc);
-      if(adminDoc === "ERROR"){
+      /* Authorize against the D1 admin_users allow-list OR a Firestore admin doc */
+      const access = await resolveAdminAccess(authUser.uid, email);
+      if(!access.allowed){
         try{ await firebase.auth().signOut(); }catch(e){}
-        qs("#login-error").textContent = "Couldn't verify your admin role. Firebase rules may be blocking reads on the users collection. Open the browser console for details.";
-        qs("#login-error").style.display = "block";
-        return;
-      }
-      if(!isAdminDoc(adminDoc)){
-        try{ await firebase.auth().signOut(); }catch(e){}
-        qs("#login-error").textContent = "Access denied. This Google account is not an authorized Esidai admin.";
+        qs("#login-error").textContent = access.firestoreBlocked
+          ? "Access denied, and Firestore reads are blocked. Make sure this email is in the D1 admin_users table (or fix your Firestore rules), then try again."
+          : "Access denied. This Google account is not an authorized Esidai admin — its email must be present in the D1 admin_users table.";
         qs("#login-error").style.display = "block";
         return;
       }
       currentUser = {
         uid: authUser.uid,
         email: authUser.email || email,
-        name: adminDoc.name || authUser.displayName || ""
+        name: access.name || authUser.displayName || ""
       };
       showAdmin(currentUser);
     }catch(err){
@@ -2087,8 +2120,8 @@ document.addEventListener("DOMContentLoaded", initHeader);
     if(firebaseReady){
       firebase.auth().onAuthStateChanged(async (user)=>{
         if(!user){ showLogin(); return; }
-        const adminDoc = await lookupAdminUser(user.uid, user.email || "");
-        if(!isAdminDoc(adminDoc)){
+        const access = await resolveAdminAccess(user.uid, user.email || "");
+        if(!access.allowed){
           try{ await firebase.auth().signOut(); }catch(e){}
           showLogin();
           return;
@@ -2096,7 +2129,7 @@ document.addEventListener("DOMContentLoaded", initHeader);
         currentUser = {
           uid: user.uid,
           email: user.email || "",
-          name: adminDoc.name || adminDoc.displayName || ""
+          name: access.name || ""
         };
         showAdmin(currentUser);
       });
