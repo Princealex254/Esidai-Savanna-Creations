@@ -104,11 +104,11 @@ p{margin:0 0 1em;color:var(--ink-soft)}
 .site-header{position:sticky;top:0;z-index:40;background:rgba(247,242,233,.94);border-bottom:1px solid var(--line)}
 .header-row{display:flex;align-items:center;justify-content:space-between;padding:16px 24px;gap:20px}
 .brand-mark{display:flex;align-items:center;gap:12px;line-height:1}
-.brand-mark .brand-emblem{width:32px;height:32px;color:var(--gold);flex:0 0 auto}
+.brand-mark .brand-emblem{width:40px;height:40px;object-fit:contain;color:var(--gold);flex:0 0 auto}
 .brand-mark .brand-text{display:flex;flex-direction:column;align-items:center;line-height:1;text-align:center}
 .brand-mark .brand-name{font-family:var(--serif);font-weight:700;font-size:1.3rem;letter-spacing:.3em;text-transform:uppercase;color:var(--brown)}
 .brand-mark .brand-tag{font-size:.62rem;letter-spacing:.22em;text-transform:uppercase;color:var(--gold-dark);margin-top:4px}
-@media (max-width:620px){.brand-mark .brand-emblem{width:26px;height:26px}.brand-mark .brand-name{font-size:1.02rem;letter-spacing:.14em}.brand-mark .brand-tag{font-size:.56rem}}
+@media (max-width:620px){.brand-mark .brand-emblem{width:30px;height:30px}.brand-mark .brand-name{font-size:1.02rem;letter-spacing:.14em}.brand-mark .brand-tag{font-size:.56rem}}
 .main-nav{display:flex;align-items:center;gap:28px}
 .main-nav a{font-size:.94rem;color:var(--ink);position:relative;padding:4px 0}
 .main-nav a[aria-current="page"]{color:var(--gold-dark)}
@@ -473,7 +473,7 @@ legend{font-family:var(--serif);color:var(--brown);padding:0 8px;font-size:1.02r
   <header class="site-header">
     <div class="header-row container">
       <a href="/" class="brand-mark">
-        <svg class="brand-emblem" viewBox="0 0 24 24" role="img" aria-label="Esidai emblem"><g fill="none" stroke="currentColor" stroke-width="1.5"><rect x="4" y="4" width="16" height="16" transform="rotate(45 12 12)"/><rect x="7.8" y="7.8" width="8.4" height="8.4" transform="rotate(45 12 12)"/></g><circle cx="12" cy="12" r="1.9" fill="currentColor"/></svg>
+        <img class="brand-emblem" src="/Esidai%20logo.jpeg" alt="Esidai logo">
         <span class="brand-text">
           <span class="brand-name">Esidai</span>
           <span class="brand-tag">Savanna Creations</span>
