@@ -396,7 +396,7 @@ legend{font-family:var(--serif);color:var(--brown);padding:0 8px;font-size:1.02r
 .login-divider span{flex:0 0 auto;font-size:.78rem;color:var(--ink-soft);text-transform:uppercase;letter-spacing:.08em}
 .google-btn{border-color:var(--line);color:var(--brown)}
 .google-btn:hover{background:var(--brown);color:var(--white);border-color:var(--brown)}
-.login-logo .brand-emblem{width:42px;height:42px;color:var(--gold);flex:0 0 auto}
+.login-logo .brand-emblem{width:48px;height:48px;object-fit:contain;color:var(--gold);flex:0 0 auto}
 .login-logo .brand-text{display:flex;flex-direction:column;align-items:center;line-height:1}
 .login-logo .brand-name{font-family:var(--serif);font-weight:700;font-size:1.45rem;letter-spacing:.3em;text-transform:uppercase;color:var(--brown);line-height:1}
 .login-logo .brand-tag{font-size:.66rem;letter-spacing:.22em;text-transform:uppercase;color:var(--gold-dark);margin-top:5px}
@@ -415,7 +415,7 @@ legend{font-family:var(--serif);color:var(--brown);padding:0 8px;font-size:1.02r
   <div id="login-view" class="login-shell">
     <div class="login-card">
       <div class="login-logo">
-        <svg class="brand-emblem" viewBox="0 0 24 24" role="img" aria-label="Esidai emblem"><g fill="none" stroke="currentColor" stroke-width="1.6"><rect x="4" y="4" width="16" height="16" transform="rotate(45 12 12)"/><rect x="7.8" y="7.8" width="8.4" height="8.4" transform="rotate(45 12 12)"/></g><circle cx="12" cy="12" r="1.9" fill="currentColor"/></svg>
+        <img class="brand-emblem" src="/Esidai%20logo.jpeg" alt="Esidai logo">
         <div class="brand-text">
           <span class="brand-name">Esidai</span>
           <span class="brand-tag">Savanna Creations</span>
@@ -520,7 +520,7 @@ legend{font-family:var(--serif);color:var(--brown);padding:0 8px;font-size:1.02r
         </div>
         <div class="admin-panel">
           <table class="table" id="orders-table">
-            <thead><tr><th>Order ID</th><th>Action</th><th>Actions</th></tr></thead>
+            <thead><tr><th>Order ID</th><th>Order Date</th><th>Action</th></tr></thead>
             <tbody id="orders-tbody"></tbody>
           </table>
           <p class="hint" id="orders-empty">No orders have been recorded yet.</p>
@@ -1544,12 +1544,28 @@ document.addEventListener("DOMContentLoaded", initHeader);
       </tr>`).join("");
   }
 
+  /* Order date — SQLite stores UTC "YYYY-MM-DD HH:MM:SS"; render it in the
+     browser's local time as e.g. "28 Sep 2026, 15:42". */
+  function formatOrderDate(value){
+    if(!value) return "—";
+    const s = String(value).trim();
+    const m = s.match(/^(\d{4})-(\d{2})-(\d{2})[ T](\d{2}):(\d{2})(?::(\d{2}))?/);
+    let dt = m
+      ? new Date(Date.UTC(+m[1], +m[2]-1, +m[3], +m[4], +m[5], m[6] ? +m[6] : 0))
+      : new Date(s);
+    if(isNaN(dt)) return escapeHtml(s);
+    const months = ["Jan","Feb","Mar","Apr","May","Jun","Jul","Aug","Sep","Oct","Nov","Dec"];
+    const pad = n => String(n).padStart(2, "0");
+    return dt.getDate() + " " + months[dt.getMonth()] + " " + dt.getFullYear()
+      + ", " + pad(dt.getHours()) + ":" + pad(dt.getMinutes());
+  }
+
   function renderOrdersTable(){
     const tbody = qs("#orders-tbody");
     tbody.innerHTML = DB.orders.map(o=>`<tr data-id="${o.id}">
       <td data-label="Order ID">${escapeHtml(o.ref||"")}</td>
-      <td data-label="Customer">${escapeHtml(o.customer||"")}</td>
-      <td data-label="Actions">
+      <td data-label="Order Date">${formatOrderDate(o.created_at)}</td>
+      <td data-label="Action">
         <button type="button" class="btn btn-outline btn-sm view-order-btn">View</button>
       </td>
     </tr>`).join("");
